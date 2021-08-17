@@ -43,7 +43,6 @@ formatting.toSignificant = (
  * @param {Array<bigint>} fraction Fraction tupple Array containing the numerator
  *    and denominator.
  * @param {number=} decimalPlaces How many decimal places to use.
- * @param {Object=} format Formatting of the output.
  * @param {Rounding} rounding Desired rounding.
  * @return {string} The result.
  */

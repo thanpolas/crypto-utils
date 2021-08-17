@@ -9,7 +9,12 @@
  */
 
 /**
- * @fileOverview bootstrap and master exporting module.
+ * @fileoverview bootstrap and master exporting module.
  */
 
-const app = module.exports = {};
+const { tokenToSignificant, tokenToFixed } = require('./tokens');
+
+const app = (module.exports = {});
+
+app.tokenToSignificant = tokenToSignificant;
+app.tokenToFixed = tokenToFixed;

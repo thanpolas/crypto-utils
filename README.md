@@ -5,13 +5,13 @@
 [![CircleCI](https://circleci.com/gh/thanpolas/crypto-utils.svg?style=svg)](https://circleci.com/gh/thanpolas/crypto-utils)
 [![codecov](https://codecov.io/gh/thanpolas/crypto-utils/branch/develop/graph/badge.svg)](https://codecov.io/gh/thanpolas/crypto-utils)
 [![npm version](https://badge.fury.io/js/crypto-utils.svg)](https://badge.fury.io/js/crypto-utils)
-[![Discord](https://img.shields.io/discord/847075821276758096)](https://discord.gg/GkyEqzJWEY)
+[![Discord](https://img.shields.io/discord/847075821276758096?label=discord&color=CBE9F0)](https://discord.gg/GkyEqzJWEY)
 [![Twitter Follow](https://img.shields.io/twitter/follow/thanpolas.svg?label=thanpolas&style=social)](https://twitter.com/thanpolas)
 
 ## Features
 
--   [Get tokens in human readable format][token_format].
--   [toSignificant and toFixed calculations for fractions][fractions_calc].
+-   [Get tokens in human readable format][token_to_significant].
+-   [toSignificant and toFixed calculations for fractions][utils].
 
 ## Install
 
@@ -122,10 +122,6 @@ The crypto-utils exposes a few utility functions for more low-level calculations
 
 ---
 
-# Acknowledgements & Credits
-
-This library was inspired from [Uniswap SDK core][unisdkcore].
-
 # Maintenance & Development
 
 ## Update Node Version
@@ -149,9 +145,15 @@ When a new node version is available you need to updated it in the following:
 -   **v0.1.0**, _17 Aug 2021_
     -   Big Bang
 
+### Acknowledgements & Credits
+
+This library was inspired from [Uniswap SDK core][unisdkcore].
+
 ## License
 
 Copyright © [Thanos Polychronakis][thanpolas] and Authors, [Licensed under ISC](/LICENSE).
 
 [decimal]: https://github.com/MikeMcl/decimal.js/
 [unisdkcore]: https://github.com/uniswap/uniswap-sdk-core
+[token_to_significant]: #tokentosignificanttokenquantity-decimals-optsignificantdigits
+[utils]: #available-utility-functions

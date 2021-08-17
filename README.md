@@ -8,6 +8,11 @@
 [![Discord](https://img.shields.io/discord/847075821276758096)](https://discord.gg/GkyEqzJWEY)
 [![Twitter Follow](https://img.shields.io/twitter/follow/thanpolas.svg?label=thanpolas&style=social)](https://twitter.com/thanpolas)
 
+## Features
+
+-   [Get tokens in human readable format][token_format].
+-   [toSignificant and toFixed calculations for fractions][fractions_calc].
+
 ## Install
 
 Install the module using NPM:
@@ -16,8 +21,112 @@ Install the module using NPM:
 npm install @thanpolas/crypto-utils --save
 ```
 
-## Documentation
+## Quick Start
 
+```js
+const { tokenAuto } = require('@thanpolas/crypto-utils');
+
+const tokenQuantity = '2083278970151697065687';
+const decimals = 18;
+
+const value = tokenAuto(tokenQuantity, decimals);
+
+console.log(value);
+// 2083.28
+```
+
+## tokenToSignificant(tokenQuantity, decimals, optSignificantDigits)
+
+Calculates the value of token quantity to significant digits, default of significant digits is 5.
+
+`tokenToSignificant()` is better suited for values that are bellow `1`.
+
+```js
+const { tokenToSignificant } = require('@thanpolas/crypto-utils');
+
+const tokenQuantity = '2083278970151697065687';
+const decimals = 18;
+
+const value = tokenToSignificant(tokenQuantity, decimals);
+console.log(value);
+// 2083.3
+
+const value = tokenToSignificant(tokenQuantity, decimals, 7);
+console.log(value);
+// 2083.279
+```
+
+## toFixed(tokenQuantity, decimals, optDecimals)
+
+Calculates the value of token quantity with fixed decimal digits, default of decimal digits is 5.
+
+`tokenToFixed()` is better suited for values that are above `1`.
+
+```js
+const { tokenToFixed } = require('@thanpolas/crypto-utils');
+
+const tokenQuantity = '2083278970151697065687';
+const decimals = 18;
+
+const value = tokenToFixed(tokenQuantity, decimals);
+console.log(value);
+// 2083.27897
+
+const value = tokenToFixed(tokenQuantity, decimals, 7);
+console.log(value);
+// 2083.2789702
+```
+
+## tokenAuto(tokenQuantity, decimals, optDecimals)
+
+Will automatically use `toFixed()` if the value is above `1` or use `toSignificant()` if the value is bellow `1`.
+
+```js
+const { tokenAuto } = require('@thanpolas/crypto-utils');
+
+const tokenQuantity = '2083278970151697065687';
+const decimals = 18;
+
+const value = tokenAuto(tokenQuantity, decimals);
+console.log(value);
+// 2083.27
+
+const value = tokenAuto(tokenQuantity, decimals, 5);
+console.log(value);
+// 2083.27897
+
+//
+// Use a quantity that's bellow 1
+//
+const tokenSmallQuantity = '278970151697065687';
+
+const value = tokenAuto(tokenSmallQuantity, decimals);
+console.log(value);
+// 0.27897
+
+const value = tokenAuto(tokenSmallQuantity, decimals, 7);
+console.log(value);
+// 0.2789702
+```
+
+---
+
+## Available Utility Functions
+
+The crypto-utils exposes a few utility functions for more low-level calculations:
+
+-   `toSignificant(fraction, significantDigits = 5, rounding = Decimal.ROUND_HALF_UP)` Underlying function that calculates to significant digits of a fraction. Fraction is a tuple Array (an array with two elements, the numerator and denominator). Rounding is a constant from the [decimal.js Package][decimal].
+-   `toFixed(fraction, decimalPlaces = 5, rounding = Decimal.ROUND_HALF_UP)` Underlying function that calculates to fixed decimals of a fraction. Fraction is a tuple Array (an array with two elements, the numerator and denominator). Rounding is a constant from the [decimal.js Package][decimal].
+-   `expDecs(decimals)` Will return the exponent of the given decimals number.
+-   `biConv(value)` Will safely convert any value to JSBI and not touch values that are of JSBI type.
+
+---
+
+# Acknowledgements & Credits
+
+This library was inspired from [Uniswap SDK core][unisdkcore].
+
+# Maintenance & Development
 
 ## Update Node Version
 
@@ -37,11 +146,12 @@ When a new node version is available you need to updated it in the following:
 
 ## Release History
 
-- **v0.0.1**, *TBD*
-    - Big Bang
+-   **v0.1.0**, _17 Aug 2021_
+    -   Big Bang
 
 ## License
 
 Copyright © [Thanos Polychronakis][thanpolas] and Authors, [Licensed under ISC](/LICENSE).
 
-[![CircleCI](https://circleci.com/gh/thanpolas/awesomelib/tree/main.svg?style=svg)](https://circleci.com/gh/thanpolas/awesomelib/tree/main)
+[decimal]: https://github.com/MikeMcl/decimal.js/
+[unisdkcore]: https://github.com/uniswap/uniswap-sdk-core

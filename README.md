@@ -4,7 +4,7 @@
 
 [![CircleCI](https://circleci.com/gh/thanpolas/crypto-utils.svg?style=svg)](https://circleci.com/gh/thanpolas/crypto-utils)
 [![codecov](https://codecov.io/gh/thanpolas/crypto-utils/branch/develop/graph/badge.svg)](https://codecov.io/gh/thanpolas/crypto-utils)
-[![npm version](https://badge.fury.io/js/crypto-utils.svg)](https://badge.fury.io/js/crypto-utils)
+[![npm version](https://badge.fury.io/js/@thanpolas/crypto-utils.svg)](https://badge.fury.io/js/@thanpolas/crypto-utils)
 [![Discord](https://img.shields.io/discord/847075821276758096?label=discord&color=CBE9F0)](https://discord.gg/GkyEqzJWEY)
 [![Twitter Follow](https://img.shields.io/twitter/follow/thanpolas.svg?label=thanpolas&style=social)](https://twitter.com/thanpolas)
 

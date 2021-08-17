@@ -2,7 +2,7 @@
  * @fileoverview Test token utilities.
  */
 
-const { tokenToSignificant, tokenToFixed } = require('../..');
+const { tokenToSignificant, tokenToFixed, tokenAuto } = require('../..');
 
 const { token18, token18Small } = require('../fixtures/tokens.fix');
 
@@ -36,16 +36,16 @@ describe('Token Formatting', () => {
     });
   });
   describe('toFixed', () => {
-    test('18 decimals default', () => {
+    test('18 decimals fixed default', () => {
       expect(tokenToFixed(token18, 18)).toEqual('2083.27897');
     });
-    test('18 decimals 7 significant', () => {
+    test('18 decimals 7 fixed', () => {
       expect(tokenToFixed(token18, 18, 7)).toEqual('2083.2789702');
     });
-    test('18 decimals 10 significant', () => {
+    test('18 decimals 10 fixed', () => {
       expect(tokenToFixed(token18, 18, 10)).toEqual('2083.2789701517');
     });
-    test('Small 18 decimals default', () => {
+    test('Small 18 decimals fixed default', () => {
       expect(tokenToFixed(token18Small, 18)).toEqual('0.27897');
     });
     test('Small 18 decimals 7 fixed', () => {
@@ -57,10 +57,34 @@ describe('Token Formatting', () => {
     test('Small 18 decimals 0 fixed', () => {
       expect(tokenToFixed(token18Small, 18, 0)).toEqual('0.27897');
     });
-    test('Small 18 decimals default fixed and custom formating', () => {
-      expect(
-        tokenToFixed(token18Small, 18, null, { groupSeparator: ',' }),
-      ).toEqual('0.27897');
+  });
+  describe('autoFormat', () => {
+    test('18 decimals auto default', () => {
+      expect(tokenAuto(token18, 18)).toEqual('2083.28');
+    });
+    test('18 decimals 7 auto', () => {
+      expect(tokenAuto(token18, 18, 7)).toEqual('2083.2789702');
+    });
+    test('18 decimals 10 auto', () => {
+      expect(tokenAuto(token18, 18, 10)).toEqual('2083.2789701517');
+    });
+    test('18 decimals 1 auto', () => {
+      expect(tokenAuto(token18, 18, 1)).toEqual('2083.3');
+    });
+    test('18 decimals 3 auto', () => {
+      expect(tokenAuto(token18, 18, 3)).toEqual('2083.279');
+    });
+    test('Small 18 decimals auto default', () => {
+      expect(tokenAuto(token18Small, 18)).toEqual('0.27897');
+    });
+    test('Small 18 decimals 7 auto', () => {
+      expect(tokenAuto(token18Small, 18, 7)).toEqual('0.2789702');
+    });
+    test('Small 18 decimals 1 auto', () => {
+      expect(tokenAuto(token18Small, 18, 1)).toEqual('0.3');
+    });
+    test('Small 18 decimals 0 auto', () => {
+      expect(tokenAuto(token18Small, 18, 0)).toEqual('0.27897');
     });
   });
 });

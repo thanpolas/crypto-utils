@@ -2,8 +2,9 @@
  * @fileoverview Token related utilities.
  */
 
-const { expDecs } = require('./utils');
+const Decimal = require('decimal.js');
 
+const { expDecs } = require('./utils');
 const { toSignificant, toFixed } = require('./formatting');
 
 const token = (module.exports = {});
@@ -44,4 +45,30 @@ token.tokenToFixed = (tokens, decimals, optDecimalPlaces = 5) => {
 
   const fraction = [tokens, decimalsExp];
   return toFixed(fraction, optDecimalPlaces);
+};
+
+/**
+ * Will format the token quantity with fixed decimals.
+ *
+ * @param {string|bigint} tokens Quantity of Tokens.
+ * @param {string|number} decimals Decimal places of the token.
+ * @param {number=} optDecimalPlaces How many decimals to use.
+ * @return {string} the formatted result.
+ */
+token.tokenAuto = (tokens, decimals, optDecimalPlaces) => {
+  const decimalsExp = expDecs(decimals);
+
+  const tempRes = Decimal.div(
+    tokens.toString(),
+    decimalsExp.toString(),
+  ).toNumber();
+
+  if (tempRes > 1) {
+    if (!optDecimalPlaces) {
+      optDecimalPlaces = 2;
+    }
+    return token.tokenToFixed(tokens, decimals, optDecimalPlaces);
+  }
+
+  return token.tokenToSignificant(tokens, decimals, optDecimalPlaces);
 };

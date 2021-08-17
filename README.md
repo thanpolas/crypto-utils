@@ -2,9 +2,9 @@
 
 > Crypto utilities for tokens and formatting
 
+[![NPM Version][npm-image]][npm-url]
 [![CircleCI](https://circleci.com/gh/thanpolas/crypto-utils.svg?style=svg)](https://circleci.com/gh/thanpolas/crypto-utils)
 [![codecov](https://codecov.io/gh/thanpolas/crypto-utils/branch/develop/graph/badge.svg)](https://codecov.io/gh/thanpolas/crypto-utils)
-[![npm version](https://badge.fury.io/js/@thanpolas/crypto-utils.svg)](https://badge.fury.io/js/@thanpolas/crypto-utils)
 [![Discord](https://img.shields.io/discord/847075821276758096?label=discord&color=CBE9F0)](https://discord.gg/GkyEqzJWEY)
 [![Twitter Follow](https://img.shields.io/twitter/follow/thanpolas.svg?label=thanpolas&style=social)](https://twitter.com/thanpolas)
 
@@ -157,3 +157,5 @@ Copyright © [Thanos Polychronakis][thanpolas] and Authors, [Licensed under ISC]
 [unisdkcore]: https://github.com/uniswap/uniswap-sdk-core
 [token_to_significant]: #tokentosignificanttokenquantity-decimals-optsignificantdigits
 [utils]: #available-utility-functions
+[npm-image]: https://img.shields.io/npm/v/@thanpolas/crypto-utils.svg
+[npm-url]: https://npmjs.org/package/@thanpolas/crypto-utils

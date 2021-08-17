@@ -1,8 +1,8 @@
 /**
- * Awesome Lib
- * Awesomesauce and sausages
+ * crypto-utils
+ * Crypto utilities for tokens and formatting
  *
- * https://github.com/thanpolas/awesome
+ * https://github.com/thanpolas/crypto-utils
  *
  * Copyright © Thanos Polychronakis
  * LICENSE on /LICENSE file.

@@ -33,7 +33,6 @@
             "text-summary"
         ],
         "roots": [
-            "./test/app",
             "./test/unit"
         ],
         "testEnvironment": "node",

@@ -1,10 +1,10 @@
-# Awesome Lib name
+# Crypto Utils
 
-> The awesome lib description
+> Crypto utilities for tokens and formatting
 
-[![CircleCI](https://circleci.com/gh/thanpolas/[...].svg?style=svg)](https://circleci.com/gh/thanpolas/[...])
-[![codecov](https://codecov.io/gh/thanpolas/[...]/branch/develop/graph/badge.svg)](https://codecov.io/gh/thanpolas/[...])
-[![npm version](https://badge.fury.io/js/[...].svg)](https://badge.fury.io/js/[...])
+[![CircleCI](https://circleci.com/gh/thanpolas/crypto-utils.svg?style=svg)](https://circleci.com/gh/thanpolas/crypto-utils)
+[![codecov](https://codecov.io/gh/thanpolas/crypto-utils/branch/develop/graph/badge.svg)](https://codecov.io/gh/thanpolas/crypto-utils)
+[![npm version](https://badge.fury.io/js/crypto-utils.svg)](https://badge.fury.io/js/crypto-utils)
 [![Discord](https://img.shields.io/discord/847075821276758096)](https://discord.gg/GkyEqzJWEY)
 [![Twitter Follow](https://img.shields.io/twitter/follow/thanpolas.svg?label=thanpolas&style=social)](https://twitter.com/thanpolas)
 
@@ -13,7 +13,7 @@
 Install the module using NPM:
 
 ```
-npm install @thanpolas/awesome-lib --save
+npm install @thanpolas/crypto-utils --save
 ```
 
 ## Documentation

@@ -13,9 +13,15 @@
  */
 
 const { tokenToSignificant, tokenToFixed, tokenAuto } = require('./tokens');
+const { toSignificant, toFixed } = require('./formatting');
+const { expDecs, biConv } = require('./utils');
 
 const app = (module.exports = {});
 
 app.tokenToSignificant = tokenToSignificant;
 app.tokenToFixed = tokenToFixed;
 app.tokenAuto = tokenAuto;
+app.toSignificant = toSignificant;
+app.toFixed = toFixed;
+app.expDecs = expDecs;
+app.biConv = biConv;

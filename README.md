@@ -141,6 +141,8 @@ When a new node version is available you need to updated it in the following:
 
 ## Release History
 
+-   **v0.1.1**, _17 Aug 2021_
+    -   Fixed and tweaked README badges.
 -   **v0.1.0**, _17 Aug 2021_
     -   Big Bang
 

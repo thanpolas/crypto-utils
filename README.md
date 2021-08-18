@@ -269,6 +269,11 @@ When a new node version is available you need to updated it in the following:
 
 ## Release History
 
+-   **v0.2.0**, _18 Aug 2021_
+    -   **Breaking** renamed `tokenAuto` to `tokenToAuto`.
+    -   Added [formatting][formatting] argument on all methods.
+    -   Created `toAuto()` function for fractions.
+    -   More tests, especially for fractions.
 -   **v0.1.1**, _17 Aug 2021_
     -   Fixed and tweaked README badges.
 -   **v0.1.0**, _17 Aug 2021_

@@ -81,6 +81,12 @@ formatting.toAuto = (
   decimalPlaces,
   rounding = Decimal.ROUND_HALF_UP,
 ) => {
+  invariant(
+    Array.isArray(fraction),
+    'First argument is the fraction, must be array',
+  );
+  invariant(fraction.length === 2, 'fraction must have two items');
+
   const [numerator, denominator] = fraction;
 
   const tempRes = Decimal.div(

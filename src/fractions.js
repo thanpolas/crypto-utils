@@ -36,7 +36,12 @@ fractions.toSignificant = (
     .toSignificantDigits(significantDigits, rounding)
     .toString();
 
-  return fractions._checkFormatting(res, optFormatting);
+  return fractions._checkFormatting(
+    res,
+    'significant',
+    significantDigits,
+    optFormatting,
+  );
 };
 
 /**
@@ -67,7 +72,7 @@ fractions.toFixed = (
     .div(denominator.toString())
     .toFixed(decimalPlaces, rounding);
 
-  return fractions._checkFormatting(res, optFormatting);
+  return fractions._checkFormatting(res, 'fixed', decimalPlaces, optFormatting);
 };
 
 /**
@@ -122,18 +127,27 @@ fractions.toAuto = (
  * Checks and applies formatting if it exists.
  *
  * @param {string} res result from the calculations
+ * @param {string} callee Invoking function.
+ * @param {number} decimalPlaces How many decimal places to use.
  * @param {boolean|Array=} optFormatting Format the output using Intl.NumberFormat.
  * @return {string} Formatted outcome.
  * @private
  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat
  */
-fractions._checkFormatting = (res, optFormatting) => {
+fractions._checkFormatting = (res, callee, decimalPlaces, optFormatting) => {
   if (!optFormatting) {
     return res;
   }
 
-  if (typeof optFormatting === 'boolean') {
-    return Intl.NumberFormat('en-US').format(res);
+  if (optFormatting === true) {
+    const options = {};
+    if (callee === 'significant') {
+      options.maximumSignificantDigits = decimalPlaces;
+    }
+    if (callee === 'fixed') {
+      options.maximumFractionDigits = decimalPlaces;
+    }
+    return Intl.NumberFormat('en-US', options).format(res);
   }
 
   if (Array.isArray(optFormatting)) {

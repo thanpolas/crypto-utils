@@ -51,6 +51,7 @@ describe('Fraction Formatting', () => {
       expect(toSignificant(fractionBellow1Str, null, true)).toEqual('0.42857');
     });
   });
+
   describe('toFixed', () => {
     test('Above 1 fraction - fixed default decimals', () => {
       expect(toFixed(fractionAbove1Str)).toEqual('47619.04762');
@@ -64,6 +65,29 @@ describe('Fraction Formatting', () => {
     test('Above 1 fraction - default decimals - default formatting', () => {
       expect(toFixed(fractionAbove1Str, null, true)).toEqual('47,619.04762');
     });
+    test('Above 1 fraction - default decimals - custom formatting', () => {
+      expect(toFixed(fractionAbove1Str, null, ['en-US'])).toEqual('47,619.048');
+    });
+    test('Above 1 fraction - default decimals - custom formatting - currency', () => {
+      expect(
+        toFixed(fractionAbove1Str, null, [
+          'en-US',
+          {
+            style: 'currency',
+            currency: 'USD',
+          },
+        ]),
+      ).toEqual('$47,619.05');
+    });
+    test('Above 1 fraction - default decimals - custom formatting - currency and decimals', () => {
+      expect(
+        toFixed(fractionAbove1Str, null, [
+          'en-US',
+          { style: 'currency', currency: 'USD', maximumFractionDigits: 3 },
+        ]),
+      ).toEqual('$47,619.048');
+    });
+
     test('Bellow 1 fraction - fixed default', () => {
       expect(toFixed(fractionBellow1Str)).toEqual('0.42857');
     });

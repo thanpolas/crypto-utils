@@ -5,7 +5,7 @@
 const invariant = require('invariant');
 const Decimal = require('decimal.js');
 
-const formatting = (module.exports = {});
+const fractions = (module.exports = {});
 
 /**
  * Will convert the fraction of the two tokens into a significant representation.
@@ -16,7 +16,7 @@ const formatting = (module.exports = {});
  * @param {number=} rounding Desired rounding.
  * @return {string} The result.
  */
-formatting.toSignificant = (
+fractions.toSignificant = (
   fraction,
   significantDigits = 5,
   rounding = Decimal.ROUND_HALF_UP,
@@ -46,7 +46,7 @@ formatting.toSignificant = (
  * @param {Rounding} rounding Desired rounding.
  * @return {string} The result.
  */
-formatting.toFixed = (
+fractions.toFixed = (
   fraction,
   decimalPlaces = 5,
   rounding = Decimal.ROUND_HALF_UP,
@@ -76,7 +76,7 @@ formatting.toFixed = (
  * @param {Rounding=} rounding Desired rounding.
  * @return {string} The result.
  */
-formatting.toAuto = (
+fractions.toAuto = (
   fraction,
   decimalPlaces,
   rounding = Decimal.ROUND_HALF_UP,
@@ -98,7 +98,7 @@ formatting.toAuto = (
     if (!decimalPlaces) {
       decimalPlaces = 2;
     }
-    return formatting.toFixed(fraction, decimalPlaces, rounding);
+    return fractions.toFixed(fraction, decimalPlaces, rounding);
   }
 
   if (!decimalPlaces) {

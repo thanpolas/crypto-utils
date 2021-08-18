@@ -2,8 +2,6 @@
  * @fileoverview Token related utilities.
  */
 
-const Decimal = require('decimal.js');
-
 const { expDecs } = require('./utils');
 const { toSignificant, toFixed, toAuto } = require('./fractions');
 
@@ -58,17 +56,6 @@ token.tokenToFixed = (tokens, decimals, optDecimalPlaces = 5) => {
 token.tokenAuto = (tokens, decimals, optDecimalPlaces) => {
   const decimalsExp = expDecs(decimals);
 
-  const tempRes = Decimal.div(
-    tokens.toString(),
-    decimalsExp.toString(),
-  ).toNumber();
-
-  if (tempRes > 1) {
-    if (!optDecimalPlaces) {
-      optDecimalPlaces = 2;
-    }
-    return token.tokenToFixed(tokens, decimals, optDecimalPlaces);
-  }
-
-  return token.tokenToSignificant(tokens, decimals, optDecimalPlaces);
+  const fraction = [tokens, decimalsExp];
+  return toAuto(fraction, optDecimalPlaces);
 };

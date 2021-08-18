@@ -12,7 +12,7 @@
  * @fileoverview bootstrap and master exporting module.
  */
 
-const { tokenToSignificant, tokenToFixed, tokenAuto } = require('./tokens');
+const { tokenToSignificant, tokenToFixed, tokenToAuto } = require('./tokens');
 const { toSignificant, toFixed, toAuto } = require('./fractions');
 const { expDecs, biConv } = require('./utils');
 
@@ -20,7 +20,7 @@ const app = (module.exports = {});
 
 app.tokenToSignificant = tokenToSignificant;
 app.tokenToFixed = tokenToFixed;
-app.tokenAuto = tokenAuto;
+app.tokenToAuto = tokenToAuto;
 app.toSignificant = toSignificant;
 app.toFixed = toFixed;
 app.toAuto = toAuto;

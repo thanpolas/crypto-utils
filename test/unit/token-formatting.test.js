@@ -30,9 +30,9 @@ describe('Token Formatting', () => {
       expect(tokenToSignificant(token18Small, 18, 0)).toEqual('0.27897');
     });
     test('Small 18 decimals default significant and custom formating', () => {
-      expect(
-        tokenToSignificant(token18Small, 18, null, { groupSeparator: ',' }),
-      ).toEqual('0.27897');
+      expect(tokenToSignificant(token18Small, 18, null, true)).toEqual(
+        '0.27897',
+      );
     });
   });
   describe('toFixed', () => {
@@ -95,7 +95,7 @@ describe('Token Formatting', () => {
       });
       test('null decimals, money format', () => {
         expect(
-          tokenToAuto(token18, 18, null, true, [
+          tokenToAuto(token18, 18, null, [
             'en-US',
             { style: 'currency', currency: 'USD' },
           ]),

@@ -23,6 +23,9 @@ fractions.toSignificant = (
   optFormatting,
   rounding = Decimal.ROUND_HALF_UP,
 ) => {
+  if (!significantDigits) {
+    significantDigits = 5;
+  }
   invariant(
     Number.isInteger(significantDigits),
     `${significantDigits} is not an integer.`,
@@ -60,6 +63,9 @@ fractions.toFixed = (
   optFormatting,
   rounding = Decimal.ROUND_HALF_UP,
 ) => {
+  if (!decimalPlaces) {
+    decimalPlaces = 5;
+  }
   invariant(
     Number.isInteger(decimalPlaces),
     `${decimalPlaces} is not an integer.`,

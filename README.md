@@ -36,14 +36,14 @@ console.log(value);
 
 # Token Formatting
 
-## tokenToSignificant(tokenQuantity, decimals, optSignificantDigits, optFormatting)
+## tokenToSignificant(tokenQuantity, tokenDecimals, optSignificantDigits, optFormatting)
 
 Calculates the value of token quantity to significant digits, default of significant digits is 5.
 
 `tokenToSignificant()` is better suited for values that are bellow `1`.
 
 -   **tokenQuantity** `{number|string|bigint}` The quantity of tokens to be formatted.
--   **decimals** `{number|string}` How many decimals this token has.
+-   **tokenDecimals** `{number|string}` How many decimals this token has.
 -   **optSignificantDigits** `{number=}` Number of significant digits, default `5`.
 -   **optFormatting** `{boolean|Array=}` Number formatting, read more on [Formatting][formatting].
 -   **Returns** `{string}` Formatted token.
@@ -63,14 +63,14 @@ console.log(value);
 // 2083.279
 ```
 
-## toFixed(tokenQuantity, decimals, optDecimals, optFormatting)
+## toFixed(tokenQuantity, tokenDecimals, optDecimals, optFormatting)
 
 Calculates the value of token quantity with fixed decimal digits, default of decimal digits is 5.
 
 `tokenToFixed()` is better suited for values that are above `1`.
 
 -   **tokenQuantity** `{number|string|bigint}` The quantity of tokens to be formatted.
--   **decimals** `{number|string}` How many decimals this token has.
+-   **tokenDecimals** `{number|string}` How many decimals this token has.
 -   **optDecimals** `{number=}` Number of decimal places to use on formatted result, default `5`.
 -   **optFormatting** `{boolean|Array=}` Number formatting, read more on [Formatting][formatting].
 -   **Returns** `{string}` Formatted token.
@@ -90,12 +90,12 @@ console.log(value);
 // 2083.2789702
 ```
 
-## tokenToAuto(tokenQuantity, decimals, optDecimals, optFormatting)
+## tokenToAuto(tokenQuantity, tokenDecimals, optDecimals, optFormatting)
 
 Will automatically use `toFixed()` if the value is above `1` or use `toSignificant()` if the value is bellow `1`.
 
 -   **tokenQuantity** `{number|string|bigint}` The quantity of tokens to be formatted.
--   **decimals** `{number|string}` How many decimals this token has.
+-   **tokenDecimals** `{number|string}` How many decimals this token has.
 -   **optDecimals** `{number=}` Number of decimal places or significant units depending on the function used. Default for fixed is `2` and default for significant is `5`.
 -   **optFormatting** `{boolean|Array=}` Number formatting, read more on [Formatting][formatting].
 -   **Returns** `{string}` Formatted token.

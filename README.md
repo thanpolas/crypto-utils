@@ -42,11 +42,11 @@ Calculates the value of token quantity to significant digits, default of signifi
 
 `tokenToSignificant()` is better suited for values that are bellow `1`.
 
--   **tokenQuantity** {number|string|bigint} The quantity of tokens to be formatted.
--   **decimals** {number|string} How many decimals this token has.
--   **optSignificantDigits** {number=} Number of significant digits, default `5`.
--   **optFormatting** {boolean|Array=} Number formatting, read more on [Formatting][formatting].
--   **Returns** {string} Formatted token.
+-   **tokenQuantity** `{number|string|bigint}` The quantity of tokens to be formatted.
+-   **decimals** `{number|string}` How many decimals this token has.
+-   **optSignificantDigits** `{number=}` Number of significant digits, default `5`.
+-   **optFormatting** `{boolean|Array=}` Number formatting, read more on [Formatting][formatting].
+-   **Returns** `{string}` Formatted token.
 
 ```js
 const { tokenToSignificant } = require('@thanpolas/crypto-utils');
@@ -69,11 +69,11 @@ Calculates the value of token quantity with fixed decimal digits, default of dec
 
 `tokenToFixed()` is better suited for values that are above `1`.
 
--   **tokenQuantity** {number|string|bigint} The quantity of tokens to be formatted.
--   **decimals** {number|string} How many decimals this token has.
--   **optDecimals** {number=} Number of decimal places to use on formatted result, default `5`.
--   **optFormatting** {boolean|Array=} Number formatting, read more on [Formatting][formatting].
--   **Returns** {string} Formatted token.
+-   **tokenQuantity** `{number|string|bigint}` The quantity of tokens to be formatted.
+-   **decimals** `{number|string}` How many decimals this token has.
+-   **optDecimals** `{number=}` Number of decimal places to use on formatted result, default `5`.
+-   **optFormatting** `{boolean|Array=}` Number formatting, read more on [Formatting][formatting].
+-   **Returns** `{string}` Formatted token.
 
 ```js
 const { tokenToFixed } = require('@thanpolas/crypto-utils');
@@ -94,11 +94,11 @@ console.log(value);
 
 Will automatically use `toFixed()` if the value is above `1` or use `toSignificant()` if the value is bellow `1`.
 
--   **tokenQuantity** {number|string|bigint} The quantity of tokens to be formatted.
--   **decimals** {number|string} How many decimals this token has.
--   **optDecimals** {number=} Number of decimal places or significant units depending on the function used. Default for fixed is `2` and default for significant is `5`.
--   **optFormatting** {boolean|Array=} Number formatting, read more on [Formatting][formatting].
--   **Returns** {string} Formatted token.
+-   **tokenQuantity** `{number|string|bigint}` The quantity of tokens to be formatted.
+-   **decimals** `{number|string}` How many decimals this token has.
+-   **optDecimals** `{number=}` Number of decimal places or significant units depending on the function used. Default for fixed is `2` and default for significant is `5`.
+-   **optFormatting** `{boolean|Array=}` Number formatting, read more on [Formatting][formatting].
+-   **Returns** `{string}` Formatted token.
 
 ```js
 const { tokenAuto } = require('@thanpolas/crypto-utils');
@@ -138,11 +138,11 @@ Underlying function that calculates to significant digits of a fraction. Fractio
 
 Tuple array items can be of type `string`, `number` or `bigint`.
 
--   **fraction** {Array<number|string|bigint>} The tuple fraction, an Array with two items representing the numerator and denominator.
--   **significantDigits** {number=} Number of significant digits, default `5`.
--   **optFormatting** {boolean|Array=} Number formatting, read more on [Formatting][formatting].
--   **rounding** {Decimal=} [Decimal.js][decimal] enumeration of rounding function, default `Decimal.ROUND_HALF_UP`.
--   **Returns** {string} Formatted token.
+-   **fraction** `{Array<number|string|bigint>}` The tuple fraction, an Array with two items representing the numerator and denominator.
+-   **significantDigits** `{number=}` Number of significant digits, default `5`.
+-   **optFormatting** `{boolean|Array=}` Number formatting, read more on [Formatting][formatting].
+-   **rounding** `{Decimal=}` [Decimal.js][decimal] enumeration of rounding function, default `Decimal.ROUND_HALF_UP`.
+-   **Returns** `{string}` Formatted token.
 
 ```js
 const { toSignificant } = require('@thanpolas/crypto-utils');
@@ -165,11 +165,11 @@ Underlying function that calculates to fixed decimals of a fraction. Fraction is
 
 Tuple array items can be of type `string`, `number` or `bigint`.
 
--   **fraction** {Array<number|string|bigint>} The tuple fraction, an Array with two items representing the numerator and denominator.
--   **decimalPlaces** {number=} Number of decimal places to use, default `5`.
--   **optFormatting** {boolean|Array=} Number formatting, read more on [Formatting][formatting].
--   **rounding** {Decimal=} [Decimal.js][decimal] enumeration of rounding function, default `Decimal.ROUND_HALF_UP`.
--   **Returns** {string} Formatted token.
+-   **fraction** `{Array<number|string|bigint>}` The tuple fraction, an Array with two items representing the numerator and denominator.
+-   **decimalPlaces** `{number=}` Number of decimal places to use, default `5`.
+-   **optFormatting** `{boolean|Array=}` Number formatting, read more on [Formatting][formatting].
+-   **rounding** `{Decimal=}` [Decimal.js][decimal] enumeration of rounding function, default `Decimal.ROUND_HALF_UP`.
+-   **Returns** `{string}` Formatted token.
 
 ```js
 const { toFixed } = require('@thanpolas/crypto-utils');
@@ -192,7 +192,7 @@ console.log(toFixed(fraction, 7, true));
 
 The Crypto Utilities package uses the [`Intl.NumberFormat` function][intl-numberformat] to format the output when desired. By default, no formatting will be applied. Let's have a look at the formatting argument one more time:
 
--   **optFormatting** {boolean|Array=} Number formatting, read more on [Formatting][formatting].
+-   **optFormatting** `{boolean|Array=}` Number formatting, read more on [Formatting][formatting].
 
 ### Boolean True Formatting
 

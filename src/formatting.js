@@ -65,3 +65,35 @@ formatting.toFixed = (
 
   return res;
 };
+
+/**
+ * Will divide and format the fraction by either using toFixed or toSignificant
+ * automatically, depending if the fracrtion division is above or bellow 1.
+ *
+ * @param {Array<bigint>} fraction Fraction tupple Array containing the numerator
+ *    and denominator.
+ * @param {number=} decimalPlaces How many decimal places to use.
+ * @param {Rounding=} rounding Desired rounding.
+ * @return {string} The result.
+ */
+formatting.toAuto = (
+  fraction,
+  decimalPlaces,
+  rounding = Decimal.ROUND_HALF_UP,
+) => {
+  const [numerator, denominator] = fraction;
+
+  const tempRes = Decimal.div(
+    numerator.toString(),
+    denominator.toString(),
+  ).toNumber();
+
+  if (tempRes > 1) {
+    if (!decimalPlaces) {
+      decimalPlaces = 2;
+    }
+    return formatting.toFixed(fraction, decimalPlaces, rounding);
+  }
+
+  return formatting.toSignificant(fraction, decimalPlaces, rounding);
+};

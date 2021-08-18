@@ -86,5 +86,21 @@ describe('Token Formatting', () => {
     test('Small 18 decimals 0 auto', () => {
       expect(tokenToAuto(token18Small, 18, 0)).toEqual('0.27897');
     });
+    describe('formatting', () => {
+      test('null decimals, default format', () => {
+        expect(tokenToAuto(token18, 18, null, true)).toEqual('2,083.28');
+      });
+      test('5 decimals, default format', () => {
+        expect(tokenToAuto(token18, 18, 5, true)).toEqual('2,083.27897');
+      });
+      test('null decimals, money format', () => {
+        expect(
+          tokenToAuto(token18, 18, null, true, [
+            'en-US',
+            { style: 'currency', currency: 'USD' },
+          ]),
+        ).toEqual('$2,083.28');
+      });
+    });
   });
 });

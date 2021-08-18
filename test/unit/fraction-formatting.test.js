@@ -64,7 +64,7 @@ describe('Fraction Formatting', () => {
           });
           test('null decimals, money format', () => {
             expect(
-              toAuto(above1, null, true, [
+              toAuto(above1, null, [
                 'en-US',
                 { style: 'currency', currency: 'USD' },
               ]),

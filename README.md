@@ -9,7 +9,7 @@
 
 ## Features
 
--   [Get tokens in human readable format][token_to_significant].
+-   [Get tokens in human readable format][token_formatting].
 -   [toSignificant and toFixed calculations for fractions][utils].
 
 ## Install
@@ -33,6 +33,8 @@ const value = tokenAuto(tokenQuantity, decimals);
 console.log(value);
 // 2083.28
 ```
+
+# Token Formatting
 
 ## tokenToSignificant(tokenQuantity, decimals, optSignificantDigits)
 
@@ -76,7 +78,7 @@ console.log(value);
 // 2083.2789702
 ```
 
-## tokenAuto(tokenQuantity, decimals, optDecimals)
+## tokenToAuto(tokenQuantity, decimals, optDecimals)
 
 Will automatically use `toFixed()` if the value is above `1` or use `toSignificant()` if the value is bellow `1`.
 
@@ -106,6 +108,20 @@ console.log(value);
 const value = tokenAuto(tokenSmallQuantity, decimals, 7);
 console.log(value);
 // 0.2789702
+```
+
+---
+
+# Fraction Formatting
+
+## toSignificant(fraction, significantDigits = 5, rounding = Decimal.ROUND_HALF_UP)
+
+Underlying function that calculates to significant digits of a fraction. Fraction is a tuple Array (an array with two elements, the numerator and denominator). Rounding is a constant from the [decimal.js Package][decimal].
+
+Tuple array items can be any of type `string`, `number` or `bigint`.
+
+```js
+const fraction = [10000, 21];
 ```
 
 ---
@@ -158,5 +174,6 @@ Copyright © [Thanos Polychronakis][thanpolas] and Authors, [Licensed under ISC]
 [unisdkcore]: https://github.com/uniswap/uniswap-sdk-core
 [token_to_significant]: #tokentosignificanttokenquantity-decimals-optsignificantdigits
 [utils]: #available-utility-functions
+[token_formatting]: #token-formatting
 [npm-image]: https://img.shields.io/npm/v/@thanpolas/crypto-utils.svg
 [npm-url]: https://npmjs.org/package/@thanpolas/crypto-utils

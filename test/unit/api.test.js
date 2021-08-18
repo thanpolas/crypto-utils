@@ -6,9 +6,10 @@ describe('API Surface Tests', () => {
       expect(cryptoUtils).toContainAllKeys([
         'tokenToSignificant',
         'tokenToFixed',
-        'tokenAuto',
+        'tokenToAuto',
         'toSignificant',
         'toFixed',
+        'toAuto',
         'expDecs',
         'biConv',
       ]);
@@ -27,8 +28,8 @@ describe('API Surface Tests', () => {
       expect(cryptoUtils.tokenToFixed).toBeFunction();
     });
 
-    it('tokenAuto is a function', () => {
-      expect(cryptoUtils.tokenAuto).toBeFunction();
+    it('tokenToAuto is a function', () => {
+      expect(cryptoUtils.tokenToAuto).toBeFunction();
     });
 
     it('toSignificant is a function', () => {
@@ -37,6 +38,9 @@ describe('API Surface Tests', () => {
 
     it('toFixed is a function', () => {
       expect(cryptoUtils.toFixed).toBeFunction();
+    });
+    it('toAuto is a function', () => {
+      expect(cryptoUtils.toAuto).toBeFunction();
     });
 
     it('expDecs is a function', () => {

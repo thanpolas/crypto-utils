@@ -53,7 +53,7 @@ token.tokenToFixed = (tokens, decimals, optDecimalPlaces = 5) => {
  * @param {number=} optDecimalPlaces How many decimals to use.
  * @return {string} the formatted result.
  */
-token.tokenAuto = (tokens, decimals, optDecimalPlaces) => {
+token.tokenToAuto = (tokens, decimals, optDecimalPlaces) => {
   const decimalsExp = expDecs(decimals);
 
   const fraction = [tokens, decimalsExp];

@@ -95,5 +95,8 @@ formatting.toAuto = (
     return formatting.toFixed(fraction, decimalPlaces, rounding);
   }
 
-  return formatting.toSignificant(fraction, decimalPlaces, rounding);
+  if (!decimalPlaces) {
+    decimalPlaces = 5;
+  }
+  return fractions.toSignificant(fraction, decimalPlaces, rounding);
 };

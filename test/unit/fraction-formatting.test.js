@@ -2,7 +2,7 @@
  * @fileoverview Test fraction formatting.
  */
 
-const { toAuto } = require('../..');
+const { toSignificant, toFixed, toAuto } = require('../..');
 
 const {
   fractionAbove1Str,
@@ -22,6 +22,62 @@ const fixtures = {
 const fixturesAr = ['string', 'number', 'bigint'];
 
 describe('Fraction Formatting', () => {
+  describe('toSignificant', () => {
+    test('Above 1 fraction - significant default decimals', () => {
+      expect(toSignificant(fractionAbove1Str)).toEqual('47619');
+    });
+    test('Above 1 fraction - 7 significant', () => {
+      expect(toSignificant(fractionAbove1Str, 7)).toEqual('47619.05');
+    });
+    test('Above 1 fraction - 10 significant', () => {
+      expect(toSignificant(fractionAbove1Str, 10)).toEqual('47619.04762');
+    });
+    test('Above 1 fraction - significant default decimals - default formatting', () => {
+      expect(toSignificant(fractionAbove1Str, null, true)).toEqual('47,619');
+    });
+    test('Bellow 1 fraction - significant default decimals', () => {
+      expect(toSignificant(fractionBellow1Str)).toEqual('0.42857');
+    });
+    test('Bellow 1 fraction - 7 significant', () => {
+      expect(toSignificant(fractionBellow1Str, 7)).toEqual('0.4285714');
+    });
+    test('Bellow 1 fraction - 1 significant', () => {
+      expect(toSignificant(fractionBellow1Str, 1)).toEqual('0.4');
+    });
+    test('Bellow 1 fraction - 0 significant', () => {
+      expect(toSignificant(fractionBellow1Str, 0)).toEqual('0.42857');
+    });
+    test('Bellow 1 fraction - default significant decimals - default formating', () => {
+      expect(toSignificant(fractionBellow1Str, null, true)).toEqual('0.42857');
+    });
+  });
+  describe('toFixed', () => {
+    test('Above 1 fraction - fixed default decimals', () => {
+      expect(toFixed(fractionAbove1Str)).toEqual('47619.04762');
+    });
+    test('Above 1 fraction - 7 fixed', () => {
+      expect(toFixed(fractionAbove1Str, 7)).toEqual('47619.0476190');
+    });
+    test('Above 1 fraction - 10 fixed', () => {
+      expect(toFixed(fractionAbove1Str, 10)).toEqual('47619.0476190476');
+    });
+    test('Above 1 fraction - default decimals - default formatting', () => {
+      expect(toFixed(fractionAbove1Str, null, true)).toEqual('47,619.04762');
+    });
+    test('Bellow 1 fraction - fixed default', () => {
+      expect(toFixed(fractionBellow1Str)).toEqual('0.42857');
+    });
+    test('Bellow 1 fraction - 7 fixed', () => {
+      expect(toFixed(fractionBellow1Str, 7)).toEqual('0.4285714');
+    });
+    test('Bellow 1 fraction - 1 fixed', () => {
+      expect(toFixed(fractionBellow1Str, 1)).toEqual('0.4');
+    });
+    test('Bellow 1 fraction - 0 fixed', () => {
+      expect(toFixed(fractionBellow1Str, 0)).toEqual('0.42857');
+    });
+  });
+
   describe('toAuto()', () => {
     fixturesAr.forEach((fixType) => {
       const [above1, bellow1] = fixtures[fixType];

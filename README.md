@@ -1,6 +1,6 @@
 # Crypto Utils
 
-> Crypto utilities for tokens and formatting
+> Crypto utilities for formatting tokens and fractions.
 
 [![NPM Version][npm-image]][npm-url]
 [![CircleCI](https://circleci.com/gh/thanpolas/crypto-utils.svg?style=svg)](https://circleci.com/gh/thanpolas/crypto-utils)
@@ -9,8 +9,8 @@
 
 ## Features
 
--   [Get tokens in human readable format][token_formatting].
--   [toSignificant and toFixed calculations for fractions][utils].
+-   [Get crypto token values in human readable format][token_formatting].
+-   [Get fraction value in human readable format][fraction_formatting].
 
 ## Install
 
@@ -36,11 +36,17 @@ console.log(value);
 
 # Token Formatting
 
-## tokenToSignificant(tokenQuantity, decimals, optSignificantDigits)
+## tokenToSignificant(tokenQuantity, decimals, optSignificantDigits, optFormatting)
 
 Calculates the value of token quantity to significant digits, default of significant digits is 5.
 
 `tokenToSignificant()` is better suited for values that are bellow `1`.
+
+-   **tokenQuantity** {number|string|bigint} The quantity of tokens to be formatted.
+-   **decimals** {number|string} How many decimals this token has.
+-   **optSignificantDigits** {number=} Number of significant digits, default `5`.
+-   **optFormatting** {boolean|Array=} Number formatting, read more on [Formatting][formatting].
+-   **Returns** {string} Formatted token.
 
 ```js
 const { tokenToSignificant } = require('@thanpolas/crypto-utils');
@@ -57,11 +63,17 @@ console.log(value);
 // 2083.279
 ```
 
-## toFixed(tokenQuantity, decimals, optDecimals)
+## toFixed(tokenQuantity, decimals, optDecimals, optFormatting)
 
 Calculates the value of token quantity with fixed decimal digits, default of decimal digits is 5.
 
 `tokenToFixed()` is better suited for values that are above `1`.
+
+-   **tokenQuantity** {number|string|bigint} The quantity of tokens to be formatted.
+-   **decimals** {number|string} How many decimals this token has.
+-   **optDecimals** {number=} Number of decimal places to use on formatted result, default `5`.
+-   **optFormatting** {boolean|Array=} Number formatting, read more on [Formatting][formatting].
+-   **Returns** {string} Formatted token.
 
 ```js
 const { tokenToFixed } = require('@thanpolas/crypto-utils');
@@ -78,9 +90,15 @@ console.log(value);
 // 2083.2789702
 ```
 
-## tokenToAuto(tokenQuantity, decimals, optDecimals)
+## tokenToAuto(tokenQuantity, decimals, optDecimals, optFormatting)
 
 Will automatically use `toFixed()` if the value is above `1` or use `toSignificant()` if the value is bellow `1`.
+
+-   **tokenQuantity** {number|string|bigint} The quantity of tokens to be formatted.
+-   **decimals** {number|string} How many decimals this token has.
+-   **optDecimals** {number=} Number of decimal places or significant units depending on the function used. Default for fixed is `2` and default for significant is `5`.
+-   **optFormatting** {boolean|Array=} Number formatting, read more on [Formatting][formatting].
+-   **Returns** {string} Formatted token.
 
 ```js
 const { tokenAuto } = require('@thanpolas/crypto-utils');
@@ -114,14 +132,110 @@ console.log(value);
 
 # Fraction Formatting
 
-## toSignificant(fraction, significantDigits = 5, rounding = Decimal.ROUND_HALF_UP)
+## toSignificant(fraction, significantDigits = 5, optFormatting, rounding = Decimal.ROUND_HALF_UP)
 
 Underlying function that calculates to significant digits of a fraction. Fraction is a tuple Array (an array with two elements, the numerator and denominator). Rounding is a constant from the [decimal.js Package][decimal].
 
-Tuple array items can be any of type `string`, `number` or `bigint`.
+Tuple array items can be of type `string`, `number` or `bigint`.
+
+-   **fraction** {Array<number|string|bigint>} The tuple fraction, an Array with two items representing the numerator and denominator.
+-   **significantDigits** {number=} Number of significant digits, default `5`.
+-   **optFormatting** {boolean|Array=} Number formatting, read more on [Formatting][formatting].
+-   **rounding** {Decimal=} [Decimal.js][decimal] enumeration of rounding function, default `Decimal.ROUND_HALF_UP`.
+-   **Returns** {string} Formatted token.
 
 ```js
-const fraction = [10000, 21];
+const { toSignificant } = require('@thanpolas/crypto-utils');
+
+const fraction = [1000000, 21]; // 47619.047619047619
+
+console.log(toSignificant(fraction));
+// '47619'
+
+console.log(toSignificant(fraction, 7));
+// '47619.05'
+
+console.log(toSignificant(fraction, 7, true));
+// '47,619.05'
+```
+
+## toFixed(fraction, decimalPlaces = 5, optFormatting, rounding = Decimal.ROUND_HALF_UP)
+
+Underlying function that calculates to fixed decimals of a fraction. Fraction is a tuple Array (an array with two elements, the numerator and denominator). Rounding is a constant from the [decimal.js Package][decimal].
+
+Tuple array items can be of type `string`, `number` or `bigint`.
+
+-   **fraction** {Array<number|string|bigint>} The tuple fraction, an Array with two items representing the numerator and denominator.
+-   **decimalPlaces** {number=} Number of decimal places to use, default `5`.
+-   **optFormatting** {boolean|Array=} Number formatting, read more on [Formatting][formatting].
+-   **rounding** {Decimal=} [Decimal.js][decimal] enumeration of rounding function, default `Decimal.ROUND_HALF_UP`.
+-   **Returns** {string} Formatted token.
+
+```js
+const { toFixed } = require('@thanpolas/crypto-utils');
+
+const fraction = [1000000, 21]; // 47619.047619047619
+
+console.log(toFixed(fraction));
+// '47619.04762'
+
+console.log(toFixed(fraction, 7));
+// '47619.0476190'
+
+console.log(toFixed(fraction, 7, true));
+// '47,619.04762'
+```
+
+---
+
+## Formatting
+
+The Crypto Utilities package uses the [`Intl.NumberFormat` function][intl-numberformat] to format the output when desired. By default, no formatting will be applied. Let's have a look at the formatting argument one more time:
+
+-   **optFormatting** {boolean|Array=} Number formatting, read more on [Formatting][formatting].
+
+### Boolean True Formatting
+
+When a boolean `true` is used, the default formatting is applied:
+
+-   **Locale**: `en-US`.
+-   **Options**: Either `maximumSignificantDigits` when toSignificant() function is used, or `maximumFractionDigits` when toFixed() function is used. The value passed to this option is the decimal parts.
+
+```js
+const { toFixed } = require('@thanpolas/crypto-utils');
+
+const fraction = [1000000, 21]; // 47619.047619047619
+
+console.log(toFixed(fraction, 7, true));
+// '47,619.04762'
+```
+
+### Array Custom Formatting
+
+When an array is used, then you can provide one or both arguments of the [`Intl.NumberFormat` function][intl-numberformat].
+
+**Note**: Custom formatting options will **override** the decimal places argument.
+
+```js
+const { toFixed } = require('@thanpolas/crypto-utils');
+
+const fraction = [1000000, 21]; // 47619.047619047619
+
+console.log(toFixed(fraction, 7, ['en-US']));
+// '47,619.048' -- decimal places (7) gets overriden by Intl.NumberFormat!
+
+console.log(
+    toFixed(fraction, 7, ['en-US', { style: 'currency', currency: 'USD' }]),
+);
+// '$47,619.05' -- decimal places (7) gets overriden by Intl.NumberFormat!
+
+console.log(
+    toFixed(fraction, 7, [
+        'en-US',
+        { style: 'currency', currency: 'USD', maximumFractionDigits: 3 },
+    ]),
+);
+// '$47,619.048' -- decimal places (7) gets overriden by Intl.NumberFormat!
 ```
 
 ---
@@ -130,8 +244,6 @@ const fraction = [10000, 21];
 
 The crypto-utils exposes a few utility functions for more low-level calculations:
 
--   `toSignificant(fraction, significantDigits = 5, rounding = Decimal.ROUND_HALF_UP)` Underlying function that calculates to significant digits of a fraction. Fraction is a tuple Array (an array with two elements, the numerator and denominator). Rounding is a constant from the [decimal.js Package][decimal].
--   `toFixed(fraction, decimalPlaces = 5, rounding = Decimal.ROUND_HALF_UP)` Underlying function that calculates to fixed decimals of a fraction. Fraction is a tuple Array (an array with two elements, the numerator and denominator). Rounding is a constant from the [decimal.js Package][decimal].
 -   `expDecs(decimals)` Will return the exponent of the given decimals number.
 -   `biConv(value)` Will safely convert any value to JSBI and not touch values that are of JSBI type.
 
@@ -175,5 +287,8 @@ Copyright © [Thanos Polychronakis][thanpolas] and Authors, [Licensed under ISC]
 [token_to_significant]: #tokentosignificanttokenquantity-decimals-optsignificantdigits
 [utils]: #available-utility-functions
 [token_formatting]: #token-formatting
+[fraction_formatting]: #fraction-formatting
+[formatting]: #formatting
 [npm-image]: https://img.shields.io/npm/v/@thanpolas/crypto-utils.svg
 [npm-url]: https://npmjs.org/package/@thanpolas/crypto-utils
+[intl-numberformat]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat

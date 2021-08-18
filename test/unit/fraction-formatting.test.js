@@ -11,7 +11,7 @@ const {
   fractionBellow1Num,
   fractionAbove1BI,
   fractionBellow1BI,
-} = require('../fixtures/tokens.fix');
+} = require('../fixtures/fractions.fix');
 
 const fixtures = {
   string: [fractionAbove1Str, fractionBellow1Str],
@@ -25,6 +25,7 @@ describe('Fraction Formatting', () => {
   describe('toAuto()', () => {
     fixturesAr.forEach((fixType) => {
       const [above1, bellow1] = fixtures[fixType];
+
       describe(`${fixType} Input`, () => {
         test(`toAuto above 1 default - ${fixType}`, () => {
           expect(toAuto(above1)).toEqual('476.19');
@@ -39,7 +40,7 @@ describe('Fraction Formatting', () => {
           expect(toAuto(above1, 1)).toEqual('476.2');
         });
         test(`toAuto above 1 decimals 3 - ${fixType}`, () => {
-          expect(toAuto(above1, 3)).toEqual('476.19');
+          expect(toAuto(above1, 3)).toEqual('476.190');
         });
         test(`toAuto bellow 1 default - ${fixType}`, () => {
           expect(toAuto(bellow1)).toEqual('0.42857');

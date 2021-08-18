@@ -274,6 +274,7 @@ When a new node version is available you need to updated it in the following:
     -   Added [formatting][formatting] argument on all methods.
     -   Created `toAuto()` function for fractions.
     -   More tests, especially for fractions.
+    -   More lax node engine setting (set to `>=12`).
 -   **v0.1.1**, _17 Aug 2021_
     -   Fixed and tweaked README badges.
 -   **v0.1.0**, _17 Aug 2021_

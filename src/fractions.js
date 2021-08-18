@@ -13,12 +13,14 @@ const fractions = (module.exports = {});
  * @param {Array<bigint>} fraction Fraction tupple array containing the numerator
  *    and denominator.
  * @param {number=} significantDigits How many significant digits to use.
+ * @param {boolean|Array=} optFormatting Format the output using Intl.NumberFormat.
  * @param {number=} rounding Desired rounding.
  * @return {string} The result.
  */
 fractions.toSignificant = (
   fraction,
   significantDigits = 5,
+  optFormatting,
   rounding = Decimal.ROUND_HALF_UP,
 ) => {
   invariant(
@@ -34,7 +36,7 @@ fractions.toSignificant = (
     .toSignificantDigits(significantDigits, rounding)
     .toString();
 
-  return res;
+  return fractions._checkFormatting(res, optFormatting);
 };
 
 /**
@@ -43,12 +45,14 @@ fractions.toSignificant = (
  * @param {Array<bigint>} fraction Fraction tupple Array containing the numerator
  *    and denominator.
  * @param {number=} decimalPlaces How many decimal places to use.
+ * @param {boolean|Array=} optFormatting Format the output using Intl.NumberFormat.
  * @param {Rounding} rounding Desired rounding.
  * @return {string} The result.
  */
 fractions.toFixed = (
   fraction,
   decimalPlaces = 5,
+  optFormatting,
   rounding = Decimal.ROUND_HALF_UP,
 ) => {
   invariant(
@@ -63,7 +67,7 @@ fractions.toFixed = (
     .div(denominator.toString())
     .toFixed(decimalPlaces, rounding);
 
-  return res;
+  return fractions._checkFormatting(res, optFormatting);
 };
 
 /**
@@ -73,12 +77,14 @@ fractions.toFixed = (
  * @param {Array<bigint>} fraction Fraction tupple Array containing the numerator
  *    and denominator.
  * @param {number=} decimalPlaces How many decimal places to use.
+ * @param {boolean|Array=} optFormatting Format the output using Intl.NumberFormat.
  * @param {Rounding=} rounding Desired rounding.
  * @return {string} The result.
  */
 fractions.toAuto = (
   fraction,
   decimalPlaces,
+  optFormatting,
   rounding = Decimal.ROUND_HALF_UP,
 ) => {
   invariant(
@@ -98,11 +104,41 @@ fractions.toAuto = (
     if (!decimalPlaces) {
       decimalPlaces = 2;
     }
-    return fractions.toFixed(fraction, decimalPlaces, rounding);
+    return fractions.toFixed(fraction, decimalPlaces, optFormatting, rounding);
   }
 
   if (!decimalPlaces) {
     decimalPlaces = 5;
   }
-  return fractions.toSignificant(fraction, decimalPlaces, rounding);
+  return fractions.toSignificant(
+    fraction,
+    decimalPlaces,
+    optFormatting,
+    rounding,
+  );
+};
+
+/**
+ * Checks and applies formatting if it exists.
+ *
+ * @param {string} res result from the calculations
+ * @param {boolean|Array=} optFormatting Format the output using Intl.NumberFormat.
+ * @return {string} Formatted outcome.
+ * @private
+ * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat
+ */
+fractions._checkFormatting = (res, optFormatting) => {
+  if (!optFormatting) {
+    return res;
+  }
+
+  if (typeof optFormatting === 'boolean') {
+    return Intl.NumberFormat('en-US').format(res);
+  }
+
+  if (Array.isArray(optFormatting)) {
+    return Intl.NumberFormat.apply(null, optFormatting).format(res);
+  }
+
+  invariant(false, 'Formatting argument can be either a boolean or an Array');
 };

@@ -13,7 +13,7 @@
  */
 
 const { tokenToSignificant, tokenToFixed, tokenAuto } = require('./tokens');
-const { toSignificant, toFixed } = require('./formatting');
+const { toSignificant, toFixed, toAuto } = require('./fractions');
 const { expDecs, biConv } = require('./utils');
 
 const app = (module.exports = {});
@@ -23,5 +23,6 @@ app.tokenToFixed = tokenToFixed;
 app.tokenAuto = tokenAuto;
 app.toSignificant = toSignificant;
 app.toFixed = toFixed;
+app.toAuto = toAuto;
 app.expDecs = expDecs;
 app.biConv = biConv;

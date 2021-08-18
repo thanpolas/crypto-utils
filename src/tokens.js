@@ -5,7 +5,7 @@
 const Decimal = require('decimal.js');
 
 const { expDecs } = require('./utils');
-const { toSignificant, toFixed } = require('./formatting');
+const { toSignificant, toFixed, toAuto } = require('./fractions');
 
 const token = (module.exports = {});
 

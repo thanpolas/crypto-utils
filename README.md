@@ -31,7 +31,7 @@ const decimals = 18;
 const value = tokenAuto(tokenQuantity, decimals);
 
 console.log(value);
-// 2083.28
+// "2083.28"
 ```
 
 # Token Formatting
@@ -56,11 +56,11 @@ const decimals = 18;
 
 const value = tokenToSignificant(tokenQuantity, decimals);
 console.log(value);
-// 2083.3
+// "2083.3"
 
 const value = tokenToSignificant(tokenQuantity, decimals, 7);
 console.log(value);
-// 2083.279
+// "2083.279"
 ```
 
 ## toFixed(tokenQuantity, tokenDecimals, optDecimals, optFormatting)
@@ -83,11 +83,11 @@ const decimals = 18;
 
 const value = tokenToFixed(tokenQuantity, decimals);
 console.log(value);
-// 2083.27897
+// "2083.27897"
 
 const value = tokenToFixed(tokenQuantity, decimals, 7);
 console.log(value);
-// 2083.2789702
+// "2083.2789702"
 ```
 
 ## tokenToAuto(tokenQuantity, tokenDecimals, optDecimals, optFormatting)
@@ -101,31 +101,31 @@ Will automatically use `toFixed()` if the value is above `1` or use `toSignifica
 -   **Returns** `{string}` Formatted token.
 
 ```js
-const { tokenAuto } = require('@thanpolas/crypto-utils');
+const { tokenToAuto } = require('@thanpolas/crypto-utils');
 
 const tokenQuantity = '2083278970151697065687';
 const decimals = 18;
 
-const value = tokenAuto(tokenQuantity, decimals);
+const value = tokenToAuto(tokenQuantity, decimals);
 console.log(value);
-// 2083.27
+// "2083.27"
 
-const value = tokenAuto(tokenQuantity, decimals, 5);
+const value = tokenToAuto(tokenQuantity, decimals, 5);
 console.log(value);
-// 2083.27897
+// "2083.27897"
 
 //
 // Use a quantity that's bellow 1
 //
 const tokenSmallQuantity = '278970151697065687';
 
-const value = tokenAuto(tokenSmallQuantity, decimals);
+const value = tokenToAuto(tokenSmallQuantity, decimals);
 console.log(value);
-// 0.27897
+// "0.27897"
 
-const value = tokenAuto(tokenSmallQuantity, decimals, 7);
+const value = tokenToAuto(tokenSmallQuantity, decimals, 7);
 console.log(value);
-// 0.2789702
+// "0.2789702"
 ```
 
 ---
@@ -134,9 +134,7 @@ console.log(value);
 
 ## toSignificant(fraction, significantDigits = 5, optFormatting, rounding = Decimal.ROUND_HALF_UP)
 
-Underlying function that calculates to significant digits of a fraction. Fraction is a tuple Array (an array with two elements, the numerator and denominator). Rounding is a constant from the [decimal.js Package][decimal].
-
-Tuple array items can be of type `string`, `number` or `bigint`.
+Underlying function that calculates to significant digits of a fraction.
 
 -   **fraction** `{Array<number|string|bigint>}` The tuple fraction, an Array with two items representing the numerator and denominator.
 -   **significantDigits** `{number=}` Number of significant digits, default `5`.
@@ -150,20 +148,18 @@ const { toSignificant } = require('@thanpolas/crypto-utils');
 const fraction = [1000000, 21]; // 47619.047619047619
 
 console.log(toSignificant(fraction));
-// '47619'
+// "47619"
 
 console.log(toSignificant(fraction, 7));
-// '47619.05'
+// "47619.05"
 
 console.log(toSignificant(fraction, 7, true));
-// '47,619.05'
+// "47,619.05"
 ```
 
 ## toFixed(fraction, decimalPlaces = 5, optFormatting, rounding = Decimal.ROUND_HALF_UP)
 
-Underlying function that calculates to fixed decimals of a fraction. Fraction is a tuple Array (an array with two elements, the numerator and denominator). Rounding is a constant from the [decimal.js Package][decimal].
-
-Tuple array items can be of type `string`, `number` or `bigint`.
+Underlying function that calculates to fixed decimals of a fraction.
 
 -   **fraction** `{Array<number|string|bigint>}` The tuple fraction, an Array with two items representing the numerator and denominator.
 -   **decimalPlaces** `{number=}` Number of decimal places to use, default `5`.
@@ -177,10 +173,10 @@ const { toFixed } = require('@thanpolas/crypto-utils');
 const fraction = [1000000, 21]; // 47619.047619047619
 
 console.log(toFixed(fraction));
-// '47619.04762'
+// "47619.04762"
 
 console.log(toFixed(fraction, 7));
-// '47619.0476190'
+// "47619.0476190"
 
 console.log(toFixed(fraction, 7, true));
 // "47,619.04762"

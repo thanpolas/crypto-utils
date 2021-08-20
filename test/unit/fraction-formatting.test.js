@@ -13,14 +13,6 @@ const {
   fractionBellow1BI,
 } = require('../fixtures/fractions.fix');
 
-const fixtures = {
-  string: [fractionAbove1Str, fractionBellow1Str],
-  number: [fractionAbove1Num, fractionBellow1Num],
-  bigint: [fractionAbove1BI, fractionBellow1BI],
-};
-
-const fixturesAr = ['string', 'number', 'bigint'];
-
 describe('Fraction Formatting', () => {
   describe('toSignificant', () => {
     test('Above 1 fraction - significant default decimals', () => {
@@ -103,6 +95,14 @@ describe('Fraction Formatting', () => {
   });
 
   describe('toAuto()', () => {
+    const fixtures = {
+      string: [fractionAbove1Str, fractionBellow1Str],
+      number: [fractionAbove1Num, fractionBellow1Num],
+      bigint: [fractionAbove1BI, fractionBellow1BI],
+    };
+
+    const fixturesAr = ['string', 'number', 'bigint'];
+
     fixturesAr.forEach((fixType) => {
       const [above1, bellow1] = fixtures[fixType];
 

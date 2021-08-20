@@ -183,7 +183,48 @@ console.log(toFixed(fraction, 7));
 // '47619.0476190'
 
 console.log(toFixed(fraction, 7, true));
-// '47,619.04762'
+// "47,619.04762"
+```
+
+## toAuto(fraction, decimalPlaces, optFormatting, rounding = Decimal.ROUND_HALF_UP)
+
+Underlying function that does automatic decimal calculation and applies appropriate function. If result is above `1` then [toFixed()][tofixed] is applied, if under `1` then [toSignificant()][tosignificant] is applied.
+
+Tuple array items can be of type `string`, `number` or `bigint`.
+
+-   **fraction** `{Array<number|string|bigint>}` The tuple fraction, an Array with two items representing the numerator and denominator.
+-   **decimalPlaces** `{number=}` Number of decimal places to use. Depending on the function used ([toFixed()][tofixed] or [toSignificant()][tosignificant]) the corresponding default value is applied if not set.
+-   **optFormatting** `{boolean|Array=}` Number formatting, read more on [Formatting][formatting].
+-   **rounding** `{Decimal=}` [Decimal.js][decimal] enumeration of rounding function, default `Decimal.ROUND_HALF_UP`.
+-   **Returns** `{string}` Formatted token.
+
+```js
+const { toAuto } = require('@thanpolas/crypto-utils');
+
+// A fraction that has a result of above 1.
+const fractionAbove1 = [1000000, 21]; // 47619.047619047619
+
+console.log(toAuto(fractionAbove1));
+// "47619.05"
+
+console.log(toAuto(fractionAbove1, 7));
+// "47619.0476190"
+
+console.log(toAuto(fractionAbove1, 5, true));
+// "47,619.04762"
+
+//
+// A fraction that has a result of below 1.
+//
+const fractionBelow1 = [21, 49]; // 0.428571428571429
+
+const value = toAuto(fractionBelow1, decimals);
+console.log(value);
+// "0.42857"
+
+const value = toAuto(fractionBelow1, decimals, 7);
+console.log(value);
+// "0.4285714"
 ```
 
 ---

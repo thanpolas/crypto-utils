@@ -339,3 +339,6 @@ Copyright © [Thanos Polychronakis][thanpolas] and Authors, [Licensed under ISC]
 [npm-image]: https://img.shields.io/npm/v/@thanpolas/crypto-utils.svg
 [npm-url]: https://npmjs.org/package/@thanpolas/crypto-utils
 [intl-numberformat]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat
+[thanpolas]: https://github.com/thanpolas
+[tosignificant]: #tosignificantfraction-significantdigits--5-optformatting-rounding--decimalround_half_up
+[tofixed]: #tofixedfraction-decimalplaces--5-optformatting-rounding--decimalround_half_up

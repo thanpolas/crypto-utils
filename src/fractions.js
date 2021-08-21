@@ -20,7 +20,7 @@ const fractions = (module.exports = {});
  */
 fractions.toSignificant = (fraction, optOptions = {}) => {
   const { formatting, reverse } = optOptions;
-  let { significantDigits, rounding } = optOptions;
+  let { decimalPlaces: significantDigits, rounding } = optOptions;
 
   if (!significantDigits) {
     significantDigits = 5;

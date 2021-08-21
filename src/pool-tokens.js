@@ -36,13 +36,8 @@ token.poolTokensToAuto = (poolFraction, decimalFraction, optOptions = {}) => {
     JSBI.multiply(scalarNumerator, biConv(token1Reserves)),
   );
 
-  let numerator = adjustedForDecimalsNumerator;
-  let denominator = adjustedForDecimalsDenominator;
-
-  if (optOptions.reverse) {
-    numerator = adjustedForDecimalsDenominator;
-    denominator = adjustedForDecimalsNumerator;
-  }
+  const numerator = adjustedForDecimalsNumerator;
+  const denominator = adjustedForDecimalsDenominator;
 
   const fraction = [numerator, denominator];
 

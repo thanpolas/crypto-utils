@@ -7,6 +7,7 @@ describe('API Surface Tests', () => {
         'tokenToSignificant',
         'tokenToFixed',
         'tokenToAuto',
+        'poolTokensToAuto',
         'toSignificant',
         'toFixed',
         'toAuto',
@@ -18,6 +19,10 @@ describe('API Surface Tests', () => {
   describe('Check Types', () => {
     it('Default export is an object', () => {
       expect(cryptoUtils).toBeObject();
+    });
+
+    it('poolTokensToAuto is a function', () => {
+      expect(cryptoUtils.poolTokensToAuto).toBeFunction();
     });
 
     it('tokenToSignificant is a function', () => {

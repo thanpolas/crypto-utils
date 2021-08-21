@@ -1,6 +1,6 @@
 /**
  * crypto-utils
- * Crypto utilities for tokens and formatting
+ * Crypto utilities for tokens and format
  *
  * https://github.com/thanpolas/crypto-utils
  *

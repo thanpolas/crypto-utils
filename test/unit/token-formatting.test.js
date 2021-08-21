@@ -6,7 +6,7 @@ const { tokenToSignificant, tokenToFixed, tokenToAuto } = require('../..');
 
 const { token18, token18Small } = require('../fixtures/tokens.fix');
 
-describe('Token Formatting', () => {
+describe('Token format', () => {
   describe('toSignificant', () => {
     test('18 decimals default', () => {
       expect(tokenToSignificant(token18, 18)).toEqual('2083.3');
@@ -35,7 +35,7 @@ describe('Token Formatting', () => {
       expect(tokenToSignificant(token18Small, 18, opts)).toEqual('0.27897');
     });
     test('Small 18 decimals default significant and custom formating', () => {
-      const opts = { formatting: true };
+      const opts = { format: true };
       expect(tokenToSignificant(token18Small, 18, opts)).toEqual('0.27897');
     });
   });
@@ -69,7 +69,7 @@ describe('Token Formatting', () => {
   });
   describe('toAuto', () => {
     test('18 decimals auto default', () => {
-      expect(tokenToAuto(token18, 18)).toEqual('2083.28');
+      expect(tokenToAuto(token18, 18)).toEqual('2083.27897');
     });
     test('18 decimals 7 auto', () => {
       const opts = { decimalPlaces: 7 };
@@ -102,20 +102,20 @@ describe('Token Formatting', () => {
       const opts = { decimalPlaces: 0 };
       expect(tokenToAuto(token18Small, 18, opts)).toEqual('0.27897');
     });
-    describe('formatting', () => {
+    describe('format', () => {
       test('null decimals, default format', () => {
-        const opts = { formatting: true };
-        expect(tokenToAuto(token18, 18, opts)).toEqual('2,083.28');
+        const opts = { format: true };
+        expect(tokenToAuto(token18, 18, opts)).toEqual('2,083.27897');
       });
       test('5 decimals, default format', () => {
-        const opts = { formatting: true, decimalPlaces: 2 };
+        const opts = { format: true, decimalPlaces: 2 };
         expect(tokenToAuto(token18, 18, opts)).toEqual('2,083.28');
       });
       test('null decimals, money format', () => {
         const opts = {
-          formatting: ['en-US', { style: 'currency', currency: 'USD' }],
+          format: ['en-US', { style: 'currency', currency: 'USD' }],
         };
-        expect(tokenToAuto(token18, 18, opts)).toEqual('$2,083.27897');
+        expect(tokenToAuto(token18, 18, opts)).toEqual('$2,083.28');
       });
     });
   });

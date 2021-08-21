@@ -1,5 +1,5 @@
 /**
- * @fileoverview Test fraction formatting.
+ * @fileoverview Test fraction format.
  */
 
 const { toSignificant, toFixed, toAuto } = require('../..');
@@ -13,7 +13,7 @@ const {
   fractionBellow1BI,
 } = require('../fixtures/fractions.fix');
 
-describe('Fraction Formatting', () => {
+describe('Fraction format', () => {
   describe('toSignificant', () => {
     test('Above 1 fraction - significant default decimals', () => {
       expect(toSignificant(fractionAbove1Str)).toEqual('47619');
@@ -26,8 +26,8 @@ describe('Fraction Formatting', () => {
       const opts = { decimalPlaces: 10 };
       expect(toSignificant(fractionAbove1Str, opts)).toEqual('47619.04762');
     });
-    test('Above 1 fraction - significant default decimals - default formatting', () => {
-      const opts = { formatting: true };
+    test('Above 1 fraction - significant default decimals - default format', () => {
+      const opts = { format: true };
       expect(toSignificant(fractionAbove1Str, opts)).toEqual('47,619');
     });
     test('Bellow 1 fraction - significant default decimals', () => {
@@ -46,7 +46,7 @@ describe('Fraction Formatting', () => {
       expect(toSignificant(fractionBellow1Str, opts)).toEqual('0.42857');
     });
     test('Bellow 1 fraction - default significant decimals - default formating', () => {
-      const opts = { formatting: true };
+      const opts = { format: true };
       expect(toSignificant(fractionBellow1Str, opts)).toEqual('0.42857');
     });
   });
@@ -63,17 +63,17 @@ describe('Fraction Formatting', () => {
       const opts = { decimalPlaces: 10 };
       expect(toFixed(fractionAbove1Str, opts)).toEqual('47619.0476190476');
     });
-    test('Above 1 fraction - default decimals - default formatting', () => {
-      const opts = { formatting: true };
+    test('Above 1 fraction - default decimals - default format', () => {
+      const opts = { format: true };
       expect(toFixed(fractionAbove1Str, opts)).toEqual('47,619.04762');
     });
-    test('Above 1 fraction - default decimals - custom formatting', () => {
-      const opts = { formatting: ['en-US'] };
+    test('Above 1 fraction - default decimals - custom format', () => {
+      const opts = { format: ['en-US'] };
       expect(toFixed(fractionAbove1Str, opts)).toEqual('47,619.048');
     });
-    test('Above 1 fraction - default decimals - custom formatting - currency', () => {
+    test('Above 1 fraction - default decimals - custom format - currency', () => {
       const opts = {
-        formatting: [
+        format: [
           'en-US',
           {
             style: 'currency',
@@ -83,9 +83,9 @@ describe('Fraction Formatting', () => {
       };
       expect(toFixed(fractionAbove1Str, opts)).toEqual('$47,619.05');
     });
-    test('Above 1 fraction - default decimals - custom formatting - currency and decimals', () => {
+    test('Above 1 fraction - default decimals - custom format - currency and decimals', () => {
       const opts = {
-        formatting: [
+        format: [
           'en-US',
           { style: 'currency', currency: 'USD', maximumFractionDigits: 3 },
         ],
@@ -158,18 +158,18 @@ describe('Fraction Formatting', () => {
           expect(toAuto(bellow1, opts)).toEqual('0.42857');
         });
 
-        describe('formatting', () => {
+        describe('format', () => {
           test('null decimals, default format', () => {
-            const opts = { formatting: true };
+            const opts = { format: true };
             expect(toAuto(above1, opts)).toEqual('47,619.04762');
           });
           test('5 decimals, default format', () => {
-            const opts = { decimalPlaces: 2, formatting: true };
+            const opts = { decimalPlaces: 2, format: true };
             expect(toAuto(above1, opts)).toEqual('47,619.05');
           });
           test('null decimals, money format', () => {
             const opts = {
-              formatting: ['en-US', { style: 'currency', currency: 'USD' }],
+              format: ['en-US', { style: 'currency', currency: 'USD' }],
             };
             expect(toAuto(above1, opts)).toEqual('$47,619.05');
           });

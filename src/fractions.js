@@ -14,12 +14,12 @@ const fractions = (module.exports = {});
  *    and denominator.
  * @param {Object=} optOptions Calculation options.
  * @param {number=} optOptions.significantDigits How many significant digits to use.
- * @param {boolean|Array=} optOptions.formatting Format the output using Intl.NumberFormat.
+ * @param {boolean|Array=} optOptions.format Format the output using Intl.NumberFormat.
  * @param {boolean=} optOptions.reverse Set to true to reverse the ratio calculation.
  * @return {string} The result.
  */
 fractions.toSignificant = (fraction, optOptions = {}) => {
-  const { formatting, reverse } = optOptions;
+  const { format, reverse } = optOptions;
   let { decimalPlaces: significantDigits, rounding } = optOptions;
 
   if (!significantDigits) {
@@ -43,12 +43,7 @@ fractions.toSignificant = (fraction, optOptions = {}) => {
     .toSignificantDigits(significantDigits, rounding)
     .toString();
 
-  return fractions._checkFormatting(
-    res,
-    'significant',
-    significantDigits,
-    formatting,
-  );
+  return fractions._checkformat(res, 'significant', significantDigits, format);
 };
 
 /**
@@ -58,12 +53,12 @@ fractions.toSignificant = (fraction, optOptions = {}) => {
  *    and denominator.
  * @param {Object=} optOptions Calculation options.
  * @param {number=} optOptions.decimalPlaces How many decimals to use.
- * @param {boolean|Array=} optOptions.formatting Format the output using Intl.NumberFormat.
+ * @param {boolean|Array=} optOptions.format Format the output using Intl.NumberFormat.
  * @param {boolean=} optOptions.reverse Set to true to reverse the ratio calculation.
  * @return {string} The result.
  */
 fractions.toFixed = (fraction, optOptions = {}) => {
-  const { formatting, reverse } = optOptions;
+  const { format, reverse } = optOptions;
   let { decimalPlaces, rounding } = optOptions;
 
   if (!decimalPlaces) {
@@ -86,7 +81,7 @@ fractions.toFixed = (fraction, optOptions = {}) => {
     .div(denominator.toString())
     .toFixed(decimalPlaces, rounding);
 
-  return fractions._checkFormatting(res, 'fixed', decimalPlaces, formatting);
+  return fractions._checkformat(res, 'fixed', decimalPlaces, format);
 };
 
 /**
@@ -97,7 +92,7 @@ fractions.toFixed = (fraction, optOptions = {}) => {
  *    and denominator.
  * @param {Object=} optOptions Calculation options.
  * @param {number=} optOptions.decimalPlaces How many decimals to use.
- * @param {boolean|Array=} optOptions.formatting Format the output using Intl.NumberFormat.
+ * @param {boolean|Array=} optOptions.format Format the output using Intl.NumberFormat.
  * @param {boolean=} optOptions.reverse Set to true to reverse the ratio calculation.
  * @return {string} The result.
  */
@@ -125,22 +120,22 @@ fractions.toAuto = (fraction, optOptions = {}) => {
 };
 
 /**
- * Checks and applies formatting if it exists.
+ * Checks and applies format if it exists.
  *
  * @param {string} res result from the calculations
  * @param {string} callee Invoking function.
  * @param {number} decimalPlaces How many decimal places to use.
- * @param {boolean|Array=} optFormatting Format the output using Intl.NumberFormat.
+ * @param {boolean|Array=} optFormat Format the output using Intl.NumberFormat.
  * @return {string} Formatted outcome.
  * @private
  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat
  */
-fractions._checkFormatting = (res, callee, decimalPlaces, optFormatting) => {
-  if (!optFormatting) {
+fractions._checkformat = (res, callee, decimalPlaces, optFormat) => {
+  if (!optFormat) {
     return res;
   }
 
-  if (optFormatting === true) {
+  if (optFormat === true) {
     const options = {};
     if (callee === 'significant') {
       options.maximumSignificantDigits = decimalPlaces;
@@ -151,9 +146,9 @@ fractions._checkFormatting = (res, callee, decimalPlaces, optFormatting) => {
     return Intl.NumberFormat('en-US', options).format(res);
   }
 
-  if (Array.isArray(optFormatting)) {
-    return Intl.NumberFormat.apply(null, optFormatting).format(res);
+  if (Array.isArray(optFormat)) {
+    return Intl.NumberFormat.apply(null, optFormat).format(res);
   }
 
-  invariant(false, 'Formatting argument can be either a boolean or an Array');
+  invariant(false, 'format argument can be either a boolean or an Array');
 };

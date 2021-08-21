@@ -18,7 +18,7 @@ const token = (module.exports = {});
  *    places of each token in poolFraction.
  * @param {Object=} optOptions Calculation options.
  * @param {number=} optOptions.decimalPlaces How many decimals to use.
- * @param {boolean|Array=} optOptions.formatting Format the output using Intl.NumberFormat.
+ * @param {boolean|Array=} optOptions.format Format the output using Intl.NumberFormat.
  * @param {boolean=} optOptions.reverse Set to true to reverse the ratio calculation.
  * @return {string} the formatted result.
  */

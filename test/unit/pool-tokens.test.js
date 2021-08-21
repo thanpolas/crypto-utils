@@ -1,5 +1,5 @@
 /**
- * @fileoverview Test Pooled tokens fraction calculation and formatting.
+ * @fileoverview Test Pooled tokens fraction calculation and format.
  */
 
 const { poolTokensToAuto } = require('../..');
@@ -74,22 +74,22 @@ describe('Pool Tokens', () => {
         ).toEqual('1.00262');
       });
     });
-    describe('formatting', () => {
+    describe('format', () => {
       test(`Above1 - default format`, () => {
-        const opts = { formatting: true };
+        const opts = { format: true };
         expect(
           poolTokensToAuto(dai_weth_pool_str, dai_weth_decimals_str, opts),
         ).toEqual('3,236.04044');
       });
       test(`Above1 - decimals 7 - default format`, () => {
-        const opts = { formatting: true, decimalPlaces: 7 };
+        const opts = { format: true, decimalPlaces: 7 };
         expect(
           poolTokensToAuto(dai_weth_pool_str, dai_weth_decimals_str, opts),
         ).toEqual('3,236.0404425');
       });
       test(`Above1 - money format`, () => {
         const opts = {
-          formatting: ['en-US', { style: 'currency', currency: 'USD' }],
+          format: ['en-US', { style: 'currency', currency: 'USD' }],
         };
         expect(
           poolTokensToAuto(dai_weth_pool_str, dai_weth_decimals_str, opts),

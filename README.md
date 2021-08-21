@@ -290,8 +290,9 @@ const { toFixed } = require('@thanpolas/crypto-utils');
 
 const fraction = [1000000, 21]; // 47619.047619047619
 
-console.log(toFixed(fraction, 7, true));
-// '47,619.04762'
+const opts = { decimalPlaces: 7, format: true };
+console.log(toFixed(fraction, opts));
+// '47,619.0476190'
 ```
 
 ### Array Custom Formatting
@@ -305,20 +306,25 @@ const { toFixed } = require('@thanpolas/crypto-utils');
 
 const fraction = [1000000, 21]; // 47619.047619047619
 
-console.log(toFixed(fraction, 7, ['en-US']));
+const opts = { decimalPlaces: 7, format: ['en-US'] };
+console.log(toFixed(fraction, opts));
 // '47,619.048' -- decimal places (7) gets overriden by Intl.NumberFormat!
 
-console.log(
-    toFixed(fraction, 7, ['en-US', { style: 'currency', currency: 'USD' }]),
-);
+const opts = {
+    decimalPlaces: 7,
+    format: ['en-US', { style: 'currency', currency: 'USD' }],
+};
+console.log(toFixed(fraction, opts));
 // '$47,619.05' -- decimal places (7) gets overriden by Intl.NumberFormat!
 
-console.log(
-    toFixed(fraction, 7, [
+const opts = {
+    decimalPlaces: 7,
+    format: [
         'en-US',
         { style: 'currency', currency: 'USD', maximumFractionDigits: 3 },
-    ]),
-);
+    ],
+};
+console.log(toFixed(fraction, opts));
 // '$47,619.048' -- decimal places (7) gets overriden by Intl.NumberFormat!
 ```
 
@@ -391,4 +397,4 @@ Copyright © [Thanos Polychronakis][thanpolas] and Authors, [Licensed under ISC]
 [tosignificant]: #tosignificantfraction-significantdigits--5-optformatting-rounding--decimalround_half_up
 [tofixed]: #tofixedfraction-decimalplaces--5-optformatting-rounding--decimalround_half_up
 [liquidity_pool_tokens]: #liquidity-pool-tokens-ratio
-[[options]: #calculation-and-formatting-options
+[options]: #calculation-and-formatting-options

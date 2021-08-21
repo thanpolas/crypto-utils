@@ -271,6 +271,7 @@ The following options are available on all functions:
 -   **decimalPlaces** `{string|number}` Define how many decimal places you want the result to be. When the calculation function is "toSignificant()" then this parameter gets translated to how many significant digits should be returned.
 -   **reverse** `{boolean}` Set to true to reverse the fraction before the calculation.
 -   **format** `{boolean|Array}` Format the output, [see next section about formatting][formatting].
+-   **rounding** `{number}` [Decimal.js][decimal] enumeration of rounding function, default `Decimal.ROUND_HALF_UP`.
 
 ## Formatting
 
@@ -362,6 +363,7 @@ When a new node version is available you need to updated it in the following:
 -   **v0.3.0**, _21 Aug 2021_
     -   Implemented the new `poolTokensToAuto()` to calculate pooled tokens ratios.
     -   **Breaking** Moved all options in an object argument.
+    -   Introduced the `reverse` option to reverse numerator and denominator in fractions before division.
     -   Forgot to add documentation for `toAuto()`, now done.
     -   Changed default decimal places on auto functions to `5` for both toFixed and toSignificant calls.
 -   **v0.2.0**, _18 Aug 2021_
@@ -385,7 +387,6 @@ Copyright © [Thanos Polychronakis][thanpolas] and Authors, [Licensed under ISC]
 
 [decimal]: https://github.com/MikeMcl/decimal.js/
 [unisdkcore]: https://github.com/uniswap/uniswap-sdk-core
-[token_to_significant]: #tokentosignificanttokenquantity-decimals-optsignificantdigits
 [utils]: #available-utility-functions
 [token_formatting]: #token-formatting
 [fraction_formatting]: #fraction-formatting
@@ -394,7 +395,7 @@ Copyright © [Thanos Polychronakis][thanpolas] and Authors, [Licensed under ISC]
 [npm-url]: https://npmjs.org/package/@thanpolas/crypto-utils
 [intl-numberformat]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat
 [thanpolas]: https://github.com/thanpolas
-[tosignificant]: #tosignificantfraction-significantdigits--5-optformatting-rounding--decimalround_half_up
-[tofixed]: #tofixedfraction-decimalplaces--5-optformatting-rounding--decimalround_half_up
+[tosignificant]: #tosignificantfraction-optoptions
+[tofixed]: #tofixedfraction-optoptions
 [liquidity_pool_tokens]: #liquidity-pool-tokens-ratio
 [options]: #calculation-and-formatting-options

@@ -306,6 +306,10 @@ When a new node version is available you need to updated it in the following:
 
 ## Release History
 
+-   **v0.3.0**, _18 Aug 2021_
+    -   Implemented the new `poolTokensToAuto()` to calculate pooled tokens ratios.
+    -   **Breaking** Moved all options in an object argument.
+    -   Forgot to add documentation for `toAuto()`, now done.
 -   **v0.2.0**, _18 Aug 2021_
     -   **Breaking** renamed `tokenAuto` to `tokenToAuto`.
     -   Added [formatting][formatting] argument on all methods.

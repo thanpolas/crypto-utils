@@ -33,12 +33,11 @@
         "coverageDirectory": "./coverage/",
         "collectCoverage": true,
         "collectCoverageFrom": [
-            "src/"
+            "./src/*.js",
+            "./src/**/*.js"
         ],
         "coverageReporters": [
-            "html",
-            "json",
-            "text-summary"
+            "json"
         ],
         "roots": [
             "./test/unit"

@@ -32,6 +32,9 @@
     "jest": {
         "coverageDirectory": "./coverage/",
         "collectCoverage": true,
+        "collectCoverageFrom": [
+            "src/"
+        ],
         "coverageReporters": [
             "html",
             "json",

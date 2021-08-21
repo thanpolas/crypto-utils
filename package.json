@@ -24,12 +24,14 @@
     "scripts": {
         "test": "npm run eslint && npm run jest",
         "eslint": "eslint src test",
-        "jest": "TZ=utc jest",
+        "jest": "TZ=utc jest --ci --coverage && codecov",
         "release": "release-it --ci",
         "release:minor": "release-it minor --ci",
         "release:major": "release-it major --ci"
     },
     "jest": {
+        "coverageDirectory": "./coverage/",
+        "collectCoverage": true,
         "coverageReporters": [
             "html",
             "text-summary"

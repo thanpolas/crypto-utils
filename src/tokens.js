@@ -15,6 +15,7 @@ const token = (module.exports = {});
  * @param {Object=} optOptions Calculation options.
  * @param {number=} optOptions.decimalPlaces How many decimals to use.
  * @param {boolean|Array=} optOptions.format Format the output using Intl.NumberFormat.
+ * @param {number=} optOptions.rounding Decimal.js rounding constant.
  * @return {string} the formatted result.
  */
 token.tokenToSignificant = (tokens, decimals, optOptions) => {
@@ -32,6 +33,7 @@ token.tokenToSignificant = (tokens, decimals, optOptions) => {
  * @param {Object=} optOptions Calculation options.
  * @param {number=} optOptions.decimalPlaces How many decimals to use.
  * @param {boolean|Array=} optOptions.format Format the output using Intl.NumberFormat.
+ * @param {number=} optOptions.rounding Decimal.js rounding constant.
  * @return {string} the formatted result.
  */
 token.tokenToFixed = (tokens, decimals, optOptions) => {
@@ -49,6 +51,7 @@ token.tokenToFixed = (tokens, decimals, optOptions) => {
  * @param {Object=} optOptions Calculation options.
  * @param {number=} optOptions.decimalPlaces How many decimals to use.
  * @param {boolean|Array=} optOptions.format Format the output using Intl.NumberFormat.
+ * @param {number=} optOptions.rounding Decimal.js rounding constant.
  * @return {string} the formatted result.
  */
 token.tokenToAuto = (tokens, decimals, optOptions) => {

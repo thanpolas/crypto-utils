@@ -16,6 +16,7 @@ const fractions = (module.exports = {});
  * @param {number=} optOptions.significantDigits How many significant digits to use.
  * @param {boolean|Array=} optOptions.format Format the output using Intl.NumberFormat.
  * @param {boolean=} optOptions.reverse Set to true to reverse the ratio calculation.
+ * @param {number=} optOptions.rounding Decimal.js rounding constant.
  * @return {string} The result.
  */
 fractions.toSignificant = (fraction, optOptions = {}) => {
@@ -55,6 +56,7 @@ fractions.toSignificant = (fraction, optOptions = {}) => {
  * @param {number=} optOptions.decimalPlaces How many decimals to use.
  * @param {boolean|Array=} optOptions.format Format the output using Intl.NumberFormat.
  * @param {boolean=} optOptions.reverse Set to true to reverse the ratio calculation.
+ * @param {number=} optOptions.rounding Decimal.js rounding constant.
  * @return {string} The result.
  */
 fractions.toFixed = (fraction, optOptions = {}) => {
@@ -94,6 +96,7 @@ fractions.toFixed = (fraction, optOptions = {}) => {
  * @param {number=} optOptions.decimalPlaces How many decimals to use.
  * @param {boolean|Array=} optOptions.format Format the output using Intl.NumberFormat.
  * @param {boolean=} optOptions.reverse Set to true to reverse the ratio calculation.
+ * @param {number=} optOptions.rounding Decimal.js rounding constant.
  * @return {string} The result.
  */
 fractions.toAuto = (fraction, optOptions = {}) => {

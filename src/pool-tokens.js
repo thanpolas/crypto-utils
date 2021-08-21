@@ -20,6 +20,7 @@ const token = (module.exports = {});
  * @param {number=} optOptions.decimalPlaces How many decimals to use.
  * @param {boolean|Array=} optOptions.format Format the output using Intl.NumberFormat.
  * @param {boolean=} optOptions.reverse Set to true to reverse the ratio calculation.
+ * @param {number=} optOptions.rounding Decimal.js rounding constant.
  * @return {string} the formatted result.
  */
 token.poolTokensToAuto = (poolFraction, decimalFraction, optOptions = {}) => {

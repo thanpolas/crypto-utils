@@ -1,6 +1,6 @@
 /**
  * crypto-utils
- * Crypto utilities for tokens and formatting
+ * Crypto utilities for tokens and format
  *
  * https://github.com/thanpolas/crypto-utils
  *
@@ -14,6 +14,7 @@
 
 const { tokenToSignificant, tokenToFixed, tokenToAuto } = require('./tokens');
 const { toSignificant, toFixed, toAuto } = require('./fractions');
+const { poolTokensToAuto } = require('./pool-tokens');
 const { expDecs, biConv } = require('./utils');
 
 const app = (module.exports = {});
@@ -21,6 +22,7 @@ const app = (module.exports = {});
 app.tokenToSignificant = tokenToSignificant;
 app.tokenToFixed = tokenToFixed;
 app.tokenToAuto = tokenToAuto;
+app.poolTokensToAuto = poolTokensToAuto;
 app.toSignificant = toSignificant;
 app.toFixed = toFixed;
 app.toAuto = toAuto;

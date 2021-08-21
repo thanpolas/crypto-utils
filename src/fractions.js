@@ -12,39 +12,39 @@ const fractions = (module.exports = {});
  *
  * @param {Array<bigint>} fraction Fraction tupple array containing the numerator
  *    and denominator.
- * @param {number=} significantDigits How many significant digits to use.
- * @param {boolean|Array=} optFormatting Format the output using Intl.NumberFormat.
- * @param {number=} rounding Desired rounding.
+ * @param {Object=} optOptions Calculation options.
+ * @param {number=} optOptions.significantDigits How many significant digits to use.
+ * @param {boolean|Array=} optOptions.format Format the output using Intl.NumberFormat.
+ * @param {boolean=} optOptions.reverse Set to true to reverse the ratio calculation.
+ * @param {number=} optOptions.rounding Decimal.js rounding constant.
  * @return {string} The result.
  */
-fractions.toSignificant = (
-  fraction,
-  significantDigits = 5,
-  optFormatting,
-  rounding = Decimal.ROUND_HALF_UP,
-) => {
+fractions.toSignificant = (fraction, optOptions = {}) => {
+  const { format, reverse } = optOptions;
+  let { decimalPlaces: significantDigits, rounding } = optOptions;
+
   if (!significantDigits) {
     significantDigits = 5;
   }
-  invariant(
-    Number.isInteger(significantDigits),
-    `${significantDigits} is not an integer.`,
-  );
-  invariant(significantDigits > 0, `${significantDigits} is not positive.`);
 
-  const [numerator, denominator] = fraction;
+  if (!rounding) {
+    rounding = Decimal.ROUND_HALF_UP;
+  }
+
+  let [numerator, denominator] = fraction;
+
+  if (reverse) {
+    const tmpNumerator = numerator;
+    numerator = denominator;
+    denominator = tmpNumerator;
+  }
 
   const res = new Decimal(numerator.toString())
     .div(denominator.toString())
     .toSignificantDigits(significantDigits, rounding)
     .toString();
 
-  return fractions._checkFormatting(
-    res,
-    'significant',
-    significantDigits,
-    optFormatting,
-  );
+  return fractions._checkformat(res, 'significant', significantDigits, format);
 };
 
 /**
@@ -52,33 +52,38 @@ fractions.toSignificant = (
  *
  * @param {Array<bigint>} fraction Fraction tupple Array containing the numerator
  *    and denominator.
- * @param {number=} decimalPlaces How many decimal places to use.
- * @param {boolean|Array=} optFormatting Format the output using Intl.NumberFormat.
- * @param {Rounding} rounding Desired rounding.
+ * @param {Object=} optOptions Calculation options.
+ * @param {number=} optOptions.decimalPlaces How many decimals to use.
+ * @param {boolean|Array=} optOptions.format Format the output using Intl.NumberFormat.
+ * @param {boolean=} optOptions.reverse Set to true to reverse the ratio calculation.
+ * @param {number=} optOptions.rounding Decimal.js rounding constant.
  * @return {string} The result.
  */
-fractions.toFixed = (
-  fraction,
-  decimalPlaces = 5,
-  optFormatting,
-  rounding = Decimal.ROUND_HALF_UP,
-) => {
+fractions.toFixed = (fraction, optOptions = {}) => {
+  const { format, reverse } = optOptions;
+  let { decimalPlaces, rounding } = optOptions;
+
   if (!decimalPlaces) {
     decimalPlaces = 5;
   }
-  invariant(
-    Number.isInteger(decimalPlaces),
-    `${decimalPlaces} is not an integer.`,
-  );
-  invariant(decimalPlaces >= 0, `${decimalPlaces} is negative.`);
 
-  const [numerator, denominator] = fraction;
+  if (!rounding) {
+    rounding = Decimal.ROUND_HALF_UP;
+  }
+
+  let [numerator, denominator] = fraction;
+
+  if (reverse) {
+    const tmpNumerator = numerator;
+    numerator = denominator;
+    denominator = tmpNumerator;
+  }
 
   const res = new Decimal(numerator.toString())
     .div(denominator.toString())
     .toFixed(decimalPlaces, rounding);
 
-  return fractions._checkFormatting(res, 'fixed', decimalPlaces, optFormatting);
+  return fractions._checkformat(res, 'fixed', decimalPlaces, format);
 };
 
 /**
@@ -87,24 +92,23 @@ fractions.toFixed = (
  *
  * @param {Array<bigint>} fraction Fraction tupple Array containing the numerator
  *    and denominator.
- * @param {number=} decimalPlaces How many decimal places to use.
- * @param {boolean|Array=} optFormatting Format the output using Intl.NumberFormat.
- * @param {Rounding=} rounding Desired rounding.
+ * @param {Object=} optOptions Calculation options.
+ * @param {number=} optOptions.decimalPlaces How many decimals to use.
+ * @param {boolean|Array=} optOptions.format Format the output using Intl.NumberFormat.
+ * @param {boolean=} optOptions.reverse Set to true to reverse the ratio calculation.
+ * @param {number=} optOptions.rounding Decimal.js rounding constant.
  * @return {string} The result.
  */
-fractions.toAuto = (
-  fraction,
-  decimalPlaces,
-  optFormatting,
-  rounding = Decimal.ROUND_HALF_UP,
-) => {
-  invariant(
-    Array.isArray(fraction),
-    'First argument is the fraction, must be array',
-  );
-  invariant(fraction.length === 2, 'fraction must have two items');
+fractions.toAuto = (fraction, optOptions = {}) => {
+  const { reverse } = optOptions;
 
-  const [numerator, denominator] = fraction;
+  let [numerator, denominator] = fraction;
+
+  if (reverse) {
+    const tmpNumerator = numerator;
+    numerator = denominator;
+    denominator = tmpNumerator;
+  }
 
   const tempRes = Decimal.div(
     numerator.toString(),
@@ -112,40 +116,29 @@ fractions.toAuto = (
   ).toNumber();
 
   if (tempRes > 1) {
-    if (!decimalPlaces) {
-      decimalPlaces = 2;
-    }
-    return fractions.toFixed(fraction, decimalPlaces, optFormatting, rounding);
+    return fractions.toFixed(fraction, optOptions);
   }
 
-  if (!decimalPlaces) {
-    decimalPlaces = 5;
-  }
-  return fractions.toSignificant(
-    fraction,
-    decimalPlaces,
-    optFormatting,
-    rounding,
-  );
+  return fractions.toSignificant(fraction, optOptions);
 };
 
 /**
- * Checks and applies formatting if it exists.
+ * Checks and applies format if it exists.
  *
  * @param {string} res result from the calculations
  * @param {string} callee Invoking function.
  * @param {number} decimalPlaces How many decimal places to use.
- * @param {boolean|Array=} optFormatting Format the output using Intl.NumberFormat.
+ * @param {boolean|Array=} optFormat Format the output using Intl.NumberFormat.
  * @return {string} Formatted outcome.
  * @private
  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat
  */
-fractions._checkFormatting = (res, callee, decimalPlaces, optFormatting) => {
-  if (!optFormatting) {
+fractions._checkformat = (res, callee, decimalPlaces, optFormat) => {
+  if (!optFormat) {
     return res;
   }
 
-  if (optFormatting === true) {
+  if (optFormat === true) {
     const options = {};
     if (callee === 'significant') {
       options.maximumSignificantDigits = decimalPlaces;
@@ -156,9 +149,9 @@ fractions._checkFormatting = (res, callee, decimalPlaces, optFormatting) => {
     return Intl.NumberFormat('en-US', options).format(res);
   }
 
-  if (Array.isArray(optFormatting)) {
-    return Intl.NumberFormat.apply(null, optFormatting).format(res);
+  if (Array.isArray(optFormat)) {
+    return Intl.NumberFormat.apply(null, optFormat).format(res);
   }
 
-  invariant(false, 'Formatting argument can be either a boolean or an Array');
+  invariant(false, 'format argument can be either a boolean or an Array');
 };

@@ -24,14 +24,20 @@
     "scripts": {
         "test": "npm run eslint && npm run jest",
         "eslint": "eslint src test",
-        "jest": "TZ=utc jest",
+        "jest": "TZ=utc jest --ci --coverage && codecov",
         "release": "release-it --ci",
         "release:minor": "release-it minor --ci",
         "release:major": "release-it major --ci"
     },
     "jest": {
+        "coverageDirectory": "./coverage/",
+        "collectCoverage": true,
+        "collectCoverageFrom": [
+            "src/"
+        ],
         "coverageReporters": [
             "html",
+            "json",
             "text-summary"
         ],
         "roots": [
@@ -52,6 +58,7 @@
     },
     "devDependencies": {
         "@types/jest": "27.0.1",
+        "codecov": "^3.8.3",
         "eslint": "7.32.0",
         "eslint-config-airbnb-base": "14.2.1",
         "eslint-config-prettier": "8.3.0",
@@ -64,7 +71,7 @@
         "jest": "27.0.6",
         "jest-extended": "0.11.5",
         "jest-junit": "12.2.0",
-        "release-it": "14.11.5",
-        "prettier": "2.3.2"
+        "prettier": "2.3.2",
+        "release-it": "14.11.5"
     }
 }

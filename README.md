@@ -9,6 +9,7 @@
 
 ## Features
 
+-   [Get Liquidity Pool ratios of Tokens][liquidity_pool_tokens].
 -   [Get crypto token values in human readable format][token_formatting].
 -   [Get fraction value in human readable format][fraction_formatting].
 
@@ -31,12 +32,47 @@ const decimals = 18;
 const value = tokenAuto(tokenQuantity, decimals);
 
 console.log(value);
-// "2083.28"
+// "2083.27897"
+```
+
+# Liquidity Pool Tokens Ratio
+
+## poolTokensToAuto(poolFraction, decimalFraction, optOptions)
+
+Calculates the ratio between the reserves of two tokens in a liquidity pool.
+
+-   **poolFraction** `{Array<string|bigint>}` The tuple fraction, an Array with two items representing the liquidity pool token reserves.
+-   **decimalFraction** `{Array<string|number>}` An Array tuple with two items representing the decimal places of token0 and token1 as defined in the "poolFraction" argument.
+-   **optOptions** `{Object=}` An object with calculation options, [read more about available options here][options].
+-   **Returns** `{string}` Formatted token.
+
+```js
+const { poolTokensToAuto } = require('@thanpolas/crypto-utils');
+
+
+// 3236.0404424781496715 - Reversed: 0.00030901962375791667205
+const dai_weth_pool_str = [
+  '124393780771528474299654469',
+  '38440119331842498607318',
+];
+
+const dai_weth_decimals_str = ['18', '18'];
+
+const value = poolTokensToAuto(dai_weth_pool_str, dai_weth_decimals_str);
+console.log(value);
+// "3236.04044"
+
+const opts {
+    reverse: true;
+}
+const value = poolTokensToAuto(dai_weth_pool_str, dai_weth_decimals_str, opts);
+console.log(value);
+// "0.00030902"
 ```
 
 # Token Formatting
 
-## tokenToSignificant(tokenQuantity, tokenDecimals, optSignificantDigits, optFormatting)
+## tokenToSignificant(tokenQuantity, tokenDecimals, optOptions)
 
 Calculates the value of token quantity to significant digits, default of significant digits is 5.
 
@@ -44,8 +80,7 @@ Calculates the value of token quantity to significant digits, default of signifi
 
 -   **tokenQuantity** `{number|string|bigint}` The quantity of tokens to be formatted.
 -   **tokenDecimals** `{number|string}` How many decimals this token has.
--   **optSignificantDigits** `{number=}` Number of significant digits, default `5`.
--   **optFormatting** `{boolean|Array=}` Number formatting, read more on [Formatting][formatting].
+-   **optOptions** `{Object=}` An object with calculation options, [read more about available options here][options].
 -   **Returns** `{string}` Formatted token.
 
 ```js
@@ -58,12 +93,13 @@ const value = tokenToSignificant(tokenQuantity, decimals);
 console.log(value);
 // "2083.3"
 
-const value = tokenToSignificant(tokenQuantity, decimals, 7);
+const opts = { decimalPlaces: 7 };
+const value = tokenToSignificant(tokenQuantity, decimals, opts);
 console.log(value);
 // "2083.279"
 ```
 
-## toFixed(tokenQuantity, tokenDecimals, optDecimals, optFormatting)
+## tokenToFixed(tokenQuantity, tokenDecimals, optOptions)
 
 Calculates the value of token quantity with fixed decimal digits, default of decimal digits is 5.
 
@@ -71,8 +107,7 @@ Calculates the value of token quantity with fixed decimal digits, default of dec
 
 -   **tokenQuantity** `{number|string|bigint}` The quantity of tokens to be formatted.
 -   **tokenDecimals** `{number|string}` How many decimals this token has.
--   **optDecimals** `{number=}` Number of decimal places to use on formatted result, default `5`.
--   **optFormatting** `{boolean|Array=}` Number formatting, read more on [Formatting][formatting].
+-   **optOptions** `{Object=}` An object with calculation options, [read more about available options here][options].
 -   **Returns** `{string}` Formatted token.
 
 ```js
@@ -85,19 +120,19 @@ const value = tokenToFixed(tokenQuantity, decimals);
 console.log(value);
 // "2083.27897"
 
-const value = tokenToFixed(tokenQuantity, decimals, 7);
+const opts = { decimalPlaces: 7 };
+const value = tokenToFixed(tokenQuantity, decimals, opts);
 console.log(value);
 // "2083.2789702"
 ```
 
-## tokenToAuto(tokenQuantity, tokenDecimals, optDecimals, optFormatting)
+## tokenToAuto(tokenQuantity, tokenDecimals, optOptions)
 
 Will automatically use `toFixed()` if the value is above `1` or use `toSignificant()` if the value is bellow `1`.
 
 -   **tokenQuantity** `{number|string|bigint}` The quantity of tokens to be formatted.
 -   **tokenDecimals** `{number|string}` How many decimals this token has.
--   **optDecimals** `{number=}` Number of decimal places or significant units depending on the function used. Default for fixed is `2` and default for significant is `5`.
--   **optFormatting** `{boolean|Array=}` Number formatting, read more on [Formatting][formatting].
+-   **optOptions** `{Object=}` An object with calculation options, [read more about available options here][options].
 -   **Returns** `{string}` Formatted token.
 
 ```js
@@ -108,11 +143,12 @@ const decimals = 18;
 
 const value = tokenToAuto(tokenQuantity, decimals);
 console.log(value);
-// "2083.27"
-
-const value = tokenToAuto(tokenQuantity, decimals, 5);
-console.log(value);
 // "2083.27897"
+
+const opts = { decimalPlaces: 7 };
+const value = tokenToAuto(tokenQuantity, decimals, opts;
+console.log(value);
+// "2083.2789701"
 
 //
 // Use a quantity that's bellow 1
@@ -123,7 +159,8 @@ const value = tokenToAuto(tokenSmallQuantity, decimals);
 console.log(value);
 // "0.27897"
 
-const value = tokenToAuto(tokenSmallQuantity, decimals, 7);
+const opts = { decimalPlaces: 7 };
+const value = tokenToAuto(tokenSmallQuantity, decimals, opts);
 console.log(value);
 // "0.2789702"
 ```
@@ -132,14 +169,12 @@ console.log(value);
 
 # Fraction Formatting
 
-## toSignificant(fraction, significantDigits = 5, optFormatting, rounding = Decimal.ROUND_HALF_UP)
+## toSignificant(fraction, optOptions)
 
 Underlying function that calculates to significant digits of a fraction.
 
 -   **fraction** `{Array<number|string|bigint>}` The tuple fraction, an Array with two items representing the numerator and denominator.
--   **significantDigits** `{number=}` Number of significant digits, default `5`.
--   **optFormatting** `{boolean|Array=}` Number formatting, read more on [Formatting][formatting].
--   **rounding** `{Decimal=}` [Decimal.js][decimal] enumeration of rounding function, default `Decimal.ROUND_HALF_UP`.
+-   **optOptions** `{Object=}` An object with calculation options, [read more about available options here][options].
 -   **Returns** `{string}` Formatted token.
 
 ```js
@@ -150,21 +185,21 @@ const fraction = [1000000, 21]; // 47619.047619047619
 console.log(toSignificant(fraction));
 // "47619"
 
-console.log(toSignificant(fraction, 7));
+const opts = { decimalPlaces: 7 };
+console.log(toSignificant(fraction, opts));
 // "47619.05"
 
-console.log(toSignificant(fraction, 7, true));
+const opts = { decimalPlaces: 7, format: true };
+console.log(toSignificant(fraction, opts));
 // "47,619.05"
 ```
 
-## toFixed(fraction, decimalPlaces = 5, optFormatting, rounding = Decimal.ROUND_HALF_UP)
+## toFixed(fraction, optOptions)
 
 Underlying function that calculates to fixed decimals of a fraction.
 
 -   **fraction** `{Array<number|string|bigint>}` The tuple fraction, an Array with two items representing the numerator and denominator.
--   **decimalPlaces** `{number=}` Number of decimal places to use, default `5`.
--   **optFormatting** `{boolean|Array=}` Number formatting, read more on [Formatting][formatting].
--   **rounding** `{Decimal=}` [Decimal.js][decimal] enumeration of rounding function, default `Decimal.ROUND_HALF_UP`.
+-   **optOptions** `{Object=}` An object with calculation options, [read more about available options here][options].
 -   **Returns** `{string}` Formatted token.
 
 ```js
@@ -175,23 +210,23 @@ const fraction = [1000000, 21]; // 47619.047619047619
 console.log(toFixed(fraction));
 // "47619.04762"
 
-console.log(toFixed(fraction, 7));
+const opts = { decimalPlaces: 7 };
+console.log(toFixed(fraction, opts));
 // "47619.0476190"
 
-console.log(toFixed(fraction, 7, true));
-// "47,619.04762"
+const opts = { decimalPlaces: 7, format: true };
+console.log(toFixed(fraction, opts));
+// "47,619.0476190"
 ```
 
-## toAuto(fraction, decimalPlaces, optFormatting, rounding = Decimal.ROUND_HALF_UP)
+## toAuto(fraction, optOptions)
 
 Underlying function that does automatic decimal calculation and applies appropriate function. If result is above `1` then [toFixed()][tofixed] is applied, if under `1` then [toSignificant()][tosignificant] is applied.
 
 Tuple array items can be of type `string`, `number` or `bigint`.
 
 -   **fraction** `{Array<number|string|bigint>}` The tuple fraction, an Array with two items representing the numerator and denominator.
--   **decimalPlaces** `{number=}` Number of decimal places to use. Depending on the function used ([toFixed()][tofixed] or [toSignificant()][tosignificant]) the corresponding default value is applied if not set.
--   **optFormatting** `{boolean|Array=}` Number formatting, read more on [Formatting][formatting].
--   **rounding** `{Decimal=}` [Decimal.js][decimal] enumeration of rounding function, default `Decimal.ROUND_HALF_UP`.
+-   **optOptions** `{Object=}` An object with calculation options, [read more about available options here][options].
 -   **Returns** `{string}` Formatted token.
 
 ```js
@@ -203,10 +238,12 @@ const fractionAbove1 = [1000000, 21]; // 47619.047619047619
 console.log(toAuto(fractionAbove1));
 // "47619.05"
 
-console.log(toAuto(fractionAbove1, 7));
+const opts = { decimalPlaces: 7 };
+console.log(toAuto(fractionAbove1, opts));
 // "47619.0476190"
 
-console.log(toAuto(fractionAbove1, 5, true));
+const opts = { format: true };
+console.log(toAuto(fractionAbove1, opts));
 // "47,619.04762"
 
 //
@@ -218,12 +255,21 @@ const value = toAuto(fractionBelow1, decimals);
 console.log(value);
 // "0.42857"
 
-const value = toAuto(fractionBelow1, decimals, 7);
+const opts = { decimalPlaces: 7 };
+const value = toAuto(fractionBelow1, decimals, opts);
 console.log(value);
 // "0.4285714"
 ```
 
 ---
+
+## Calculation and Formatting Options
+
+The following options are available on all functions:
+
+-   **decimalPlaces** `{string|number}` Define how many decimal places you want the result to be. When the calculation function is "toSignificant()" then this parameter gets translated to how many significant digits should be returned.
+-   **reverse** `{boolean}` Set to true to reverse the fraction before the calculation.
+-   **format** `{boolean|Array}` Format the output, [see next section about formatting][formatting].
 
 ## Formatting
 
@@ -306,10 +352,11 @@ When a new node version is available you need to updated it in the following:
 
 ## Release History
 
--   **v0.3.0**, _18 Aug 2021_
+-   **v0.3.0**, _21 Aug 2021_
     -   Implemented the new `poolTokensToAuto()` to calculate pooled tokens ratios.
     -   **Breaking** Moved all options in an object argument.
     -   Forgot to add documentation for `toAuto()`, now done.
+    -   Changed default decimal places on auto functions to `5` for both toFixed and toSignificant calls.
 -   **v0.2.0**, _18 Aug 2021_
     -   **Breaking** renamed `tokenAuto` to `tokenToAuto`.
     -   Added [formatting][formatting] argument on all methods.
@@ -342,3 +389,5 @@ Copyright © [Thanos Polychronakis][thanpolas] and Authors, [Licensed under ISC]
 [thanpolas]: https://github.com/thanpolas
 [tosignificant]: #tosignificantfraction-significantdigits--5-optformatting-rounding--decimalround_half_up
 [tofixed]: #tofixedfraction-decimalplaces--5-optformatting-rounding--decimalround_half_up
+[liquidity_pool_tokens]: #liquidity-pool-tokens-ratio
+[[options]: #calculation-and-formatting-options

@@ -12,24 +12,16 @@ const token = (module.exports = {});
  *
  * @param {string|bigint} tokens Quantity of Tokens.
  * @param {string|number} decimals Decimal places of the token.
- * @param {number=} optSignificantDigits How many significant digits to use.
- * @param {boolean|Array=} optformat Format the output using Intl.NumberFormat.
+ * @param {Object=} optOptions Calculation options.
+ * @param {number=} optOptions.decimalPlaces How many decimals to use.
+ * @param {boolean|Array=} optOptions.format Format the output using Intl.NumberFormat.
  * @return {string} the formatted result.
  */
-token.tokenToSignificant = (
-  tokens,
-  decimals,
-  optSignificantDigits = 5,
-  optformat,
-) => {
+token.tokenToSignificant = (tokens, decimals, optOptions) => {
   const decimalsExp = expDecs(decimals);
 
-  if (!optSignificantDigits) {
-    optSignificantDigits = 5;
-  }
-
   const fraction = [tokens, decimalsExp];
-  return toSignificant(fraction, optSignificantDigits, optformat);
+  return toSignificant(fraction, optOptions);
 };
 
 /**
@@ -37,19 +29,16 @@ token.tokenToSignificant = (
  *
  * @param {string|bigint} tokens Quantity of Tokens.
  * @param {string|number} decimals Decimal places of the token.
- * @param {number=} optDecimalPlaces How many decimals to use.
- * @param {boolean|Array=} optformat Format the output using Intl.NumberFormat.
+ * @param {Object=} optOptions Calculation options.
+ * @param {number=} optOptions.decimalPlaces How many decimals to use.
+ * @param {boolean|Array=} optOptions.format Format the output using Intl.NumberFormat.
  * @return {string} the formatted result.
  */
-token.tokenToFixed = (tokens, decimals, optDecimalPlaces = 5, optformat) => {
+token.tokenToFixed = (tokens, decimals, optOptions) => {
   const decimalsExp = expDecs(decimals);
 
-  if (!optDecimalPlaces) {
-    optDecimalPlaces = 5;
-  }
-
   const fraction = [tokens, decimalsExp];
-  return toFixed(fraction, optDecimalPlaces, optformat);
+  return toFixed(fraction, optOptions);
 };
 
 /**
@@ -57,13 +46,14 @@ token.tokenToFixed = (tokens, decimals, optDecimalPlaces = 5, optformat) => {
  *
  * @param {string|bigint} tokens Quantity of Tokens.
  * @param {string|number} decimals Decimal places of the token.
- * @param {number=} optDecimalPlaces How many decimals to use.
- * @param {boolean|Array=} optformat Format the output using Intl.NumberFormat.
+ * @param {Object=} optOptions Calculation options.
+ * @param {number=} optOptions.decimalPlaces How many decimals to use.
+ * @param {boolean|Array=} optOptions.format Format the output using Intl.NumberFormat.
  * @return {string} the formatted result.
  */
-token.tokenToAuto = (tokens, decimals, optDecimalPlaces, optformat) => {
+token.tokenToAuto = (tokens, decimals, optOptions) => {
   const decimalsExp = expDecs(decimals);
 
   const fraction = [tokens, decimalsExp];
-  return toAuto(fraction, optDecimalPlaces, optformat);
+  return toAuto(fraction, optOptions);
 };

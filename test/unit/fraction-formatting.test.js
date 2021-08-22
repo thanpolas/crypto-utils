@@ -2,7 +2,7 @@
  * @fileoverview Test fraction format.
  */
 
-const { toSignificant, toFixed, toAuto } = require('../..');
+const { toSignificant, toFixed, toAuto, Rounding } = require('../..');
 
 const {
   fractionAbove1Str,
@@ -49,11 +49,21 @@ describe('Fraction format', () => {
       const opts = { format: true };
       expect(toSignificant(fractionBellow1Str, opts)).toEqual('0.42857');
     });
+    test('Bellow 1 fraction - Rounding - significant', () => {
+      const opts = {
+        decimalPlaces: 3,
+        rounding: Rounding.ROUND_FLOOR,
+      };
+      expect(toSignificant(fractionBellow1Str, opts)).toEqual('0.428');
+    });
   });
 
   describe('toFixed', () => {
     test('Above 1 fraction - fixed default decimals', () => {
       expect(toFixed(fractionAbove1Str)).toEqual('47619.04762');
+    });
+    test('Above 1 fraction - fixed - default decimals - reversed', () => {
+      expect(toFixed(fractionAbove1Str, { reverse: true })).toEqual('0.00002');
     });
     test('Above 1 fraction - 7 fixed', () => {
       const opts = { decimalPlaces: 7 };
@@ -71,6 +81,13 @@ describe('Fraction format', () => {
       const opts = { format: ['en-US'] };
       expect(toFixed(fractionAbove1Str, opts)).toEqual('47,619.048');
     });
+    test('Above 1 fraction - default decimals - bad format', () => {
+      const opts = { format: 1 };
+      expect(() => toFixed(fractionAbove1Str, opts)).toThrow(
+        'format argument can be either a boolean or an Array',
+      );
+    });
+
     test('Above 1 fraction - default decimals - custom format - currency', () => {
       const opts = {
         format: [
@@ -107,6 +124,13 @@ describe('Fraction format', () => {
     test('Bellow 1 fraction - 0 fixed', () => {
       const opts = { decimalPlaces: 0 };
       expect(toFixed(fractionBellow1Str, opts)).toEqual('0.42857');
+    });
+    test('Bellow 1 fraction - Rounding - fixed', () => {
+      const opts = {
+        decimalPlaces: 3,
+        rounding: Rounding.ROUND_FLOOR,
+      };
+      expect(toFixed(fractionBellow1Str, opts)).toEqual('0.428');
     });
   });
 
@@ -156,6 +180,13 @@ describe('Fraction format', () => {
         test(`toAuto bellow 1 decimals 0 - ${fixType}`, () => {
           const opts = { decimalPlaces: 0 };
           expect(toAuto(bellow1, opts)).toEqual('0.42857');
+        });
+        test('toAuto Bellow 1 fraction - Rounding', () => {
+          const opts = {
+            decimalPlaces: 3,
+            rounding: Rounding.ROUND_FLOOR,
+          };
+          expect(toAuto(fractionBellow1Str, opts)).toEqual('0.428');
         });
 
         describe('format', () => {

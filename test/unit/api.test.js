@@ -1,3 +1,9 @@
+/**
+ * @fileoverview API surface tests.
+ */
+
+const Decimal = require('decimal.js');
+
 const cryptoUtils = require('../..');
 
 describe('API Surface Tests', () => {
@@ -13,6 +19,7 @@ describe('API Surface Tests', () => {
         'toAuto',
         'expDecs',
         'biConv',
+        'Rounding',
       ]);
     });
   });
@@ -54,6 +61,32 @@ describe('API Surface Tests', () => {
 
     it('biConv is a function', () => {
       expect(cryptoUtils.biConv).toBeFunction();
+    });
+
+    it('Rounding is an Object', () => {
+      expect(cryptoUtils.Rounding).toBeObject();
+    });
+  });
+
+  describe('Values', () => {
+    it('Should have Rounding values matching the ones from Decimal.js', () => {
+      expect(cryptoUtils.Rounding.ROUND_UP).toEqual(Decimal.ROUND_UP);
+      expect(cryptoUtils.Rounding.ROUND_DOWN).toEqual(Decimal.ROUND_DOWN);
+      expect(cryptoUtils.Rounding.ROUND_CEIL).toEqual(Decimal.ROUND_CEIL);
+      expect(cryptoUtils.Rounding.ROUND_FLOOR).toEqual(Decimal.ROUND_FLOOR);
+      expect(cryptoUtils.Rounding.ROUND_HALF_UP).toEqual(Decimal.ROUND_HALF_UP);
+      expect(cryptoUtils.Rounding.ROUND_HALF_DOWN).toEqual(
+        Decimal.ROUND_HALF_DOWN,
+      );
+      expect(cryptoUtils.Rounding.ROUND_HALF_EVEN).toEqual(
+        Decimal.ROUND_HALF_EVEN,
+      );
+      expect(cryptoUtils.Rounding.ROUND_HALF_CEIL).toEqual(
+        Decimal.ROUND_HALF_CEIL,
+      );
+      expect(cryptoUtils.Rounding.ROUND_HALF_FLOO).toEqual(
+        Decimal.ROUND_HALF_FLOO,
+      );
     });
   });
 });

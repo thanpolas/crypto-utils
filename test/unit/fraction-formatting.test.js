@@ -55,6 +55,9 @@ describe('Fraction format', () => {
     test('Above 1 fraction - fixed default decimals', () => {
       expect(toFixed(fractionAbove1Str)).toEqual('47619.04762');
     });
+    test('Above 1 fraction - fixed - default decimals - reversed', () => {
+      expect(toFixed(fractionAbove1Str, { reverse: true })).toEqual('0.00002');
+    });
     test('Above 1 fraction - 7 fixed', () => {
       const opts = { decimalPlaces: 7 };
       expect(toFixed(fractionAbove1Str, opts)).toEqual('47619.0476190');
@@ -71,6 +74,13 @@ describe('Fraction format', () => {
       const opts = { format: ['en-US'] };
       expect(toFixed(fractionAbove1Str, opts)).toEqual('47,619.048');
     });
+    test('Above 1 fraction - default decimals - bad format', () => {
+      const opts = { format: 1 };
+      expect(() => toFixed(fractionAbove1Str, opts)).toThrow(
+        'format argument can be either a boolean or an Array',
+      );
+    });
+
     test('Above 1 fraction - default decimals - custom format - currency', () => {
       const opts = {
         format: [

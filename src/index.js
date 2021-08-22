@@ -16,6 +16,7 @@ const { tokenToSignificant, tokenToFixed, tokenToAuto } = require('./tokens');
 const { toSignificant, toFixed, toAuto } = require('./fractions');
 const { poolTokensToAuto } = require('./pool-tokens');
 const { expDecs, biConv } = require('./utils');
+const { Rounding } = require('./constants');
 
 const app = (module.exports = {});
 
@@ -28,3 +29,4 @@ app.toFixed = toFixed;
 app.toAuto = toAuto;
 app.expDecs = expDecs;
 app.biConv = biConv;
+app.Rounding = Rounding;

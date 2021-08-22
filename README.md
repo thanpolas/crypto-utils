@@ -404,6 +404,8 @@ When a new node version is available you need to updated it in the following:
 
 ## Release History
 
+-   **v0.3.1**, _22 Aug 2021_
+    -   Expose the `Rounding` enumeration for [Rounding constants][rounding].
 -   **v0.3.0**, _21 Aug 2021_
     -   Implemented the new `poolTokensToAuto()` to calculate pooled tokens ratios.
     -   **Breaking** Moved all options in an object argument.

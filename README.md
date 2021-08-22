@@ -264,14 +264,58 @@ console.log(value);
 
 ---
 
-## Calculation and Formatting Options
+# Calculation and Formatting Options
 
 The following options are available on all functions:
 
 -   **decimalPlaces** `{string|number}` Define how many decimal places you want the result to be. When the calculation function is "toSignificant()" then this parameter gets translated to how many significant digits should be returned.
 -   **reverse** `{boolean}` Set to true to reverse the fraction before the calculation.
 -   **format** `{boolean|Array}` Format the output, [see next section about formatting][formatting].
--   **rounding** `{number}` [Decimal.js][decimal] enumeration of rounding function, default `Decimal.ROUND_HALF_UP`.
+-   **rounding** `{number}` Value for rounding function, default `Rounding.ROUND_HALF_UP`, [see Roudning][rounding].
+
+## Rounding
+
+Rounding is an enumeration of constants from [Decimal.js][decimal]:
+
+| Property         | Value | Description                                                                     |
+| ---------------- | ----- | ------------------------------------------------------------------------------- |
+| ROUND_UP         | 0     | Rounds away from zero                                                           |
+| ROUND_DOWN       | 1     | Rounds towards zero                                                             |
+| ROUND_CEIL       | 2     | Rounds towards Infinity                                                         |
+| ROUND_FLOOR      | 3     | Rounds towards -Infinity                                                        |
+| ROUND_HALF_UP    | 4     | Rounds towards nearest neighbour. If equidistant, rounds away from zero         |
+| ROUND_HALF_DOWN  | 5     | Rounds towards nearest neighbour. If equidistant, rounds towards zero           |
+| ROUND_HALF_EVEN  | 6     | Rounds towards nearest neighbour. If equidistant, rounds towards even neighbour |
+| ROUND_HALF_CEIL  | 7     | Rounds towards nearest neighbour. If equidistant, rounds towards Infinity       |
+| ROUND_HALF_FLOOR | 8     | Rounds towards nearest neighbour. If equidistant, rounds towards -Infinity      |
+
+### Rounding Example
+
+```js
+const { toFixed } = require('@thanpolas/crypto-utils');
+
+const fraction = [21, 49]; // 0.428571428571429
+
+//
+// Default Rounding
+//
+const opts = {
+    decimalPlaces: 3,
+};
+toFixed(fraction, opts);
+// 0.429 - Default rounding is ROUND_HALF_UP
+
+//
+// ROUND_FLOOR Rounding
+//
+const opts = {
+    decimalPlaces: 3,
+    rounding: Rounding.ROUND_FLOOR,
+};
+
+toFixed(fraction, opts);
+// 0.428 - Override rounding to ROUND_FLOOR
+```
 
 ## Formatting
 
@@ -399,3 +443,4 @@ Copyright © [Thanos Polychronakis][thanpolas] and Authors, [Licensed under ISC]
 [tofixed]: #tofixedfraction-optoptions
 [liquidity_pool_tokens]: #liquidity-pool-tokens-ratio
 [options]: #calculation-and-formatting-options
+[rounding]: #rounding

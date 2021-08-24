@@ -8,6 +8,19 @@
 [![Discord](https://img.shields.io/discord/847075821276758096?label=discord&color=CBE9F0)](https://discord.gg/GkyEqzJWEY)
 [![Twitter Follow](https://img.shields.io/twitter/follow/thanpolas.svg?label=thanpolas&style=social)](https://twitter.com/thanpolas)
 
+## <br />
+
+<br />
+
+> Check out the other Uniswap and crypto libraries, that depend on this library:
+>
+> 💰 ["@thanpolas/univ3prices" for calculating Uniswap V3 Prices][univ3prices].
+> <br />☎️ ["@thanpolas/uniswap-chain-queries" for fetching on-chain data for ERC20 tokens, Uniswap V2 (and clones) and Uniswap V3][uni-queries].
+
+## <br />
+
+<br />
+
 ## Features
 
 -   [Get Liquidity Pool ratios of Tokens][liquidity_pool_tokens].
@@ -446,3 +459,6 @@ Copyright © [Thanos Polychronakis][thanpolas] and Authors, [Licensed under ISC]
 [liquidity_pool_tokens]: #liquidity-pool-tokens-ratio
 [options]: #calculation-and-formatting-options
 [rounding]: #rounding
+[univ3prices]: https://github.com/thanpolas/univ3prices
+[crypto-utils]: https://github.com/thanpolas/crypto-utils
+[uni-queries]: https://github.com/thanpolas/uniswap-chain-queries

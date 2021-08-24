@@ -14,8 +14,8 @@
 
 > Check out the other Uniswap and crypto libraries, that depend on this library:
 >
-> 💰 ["@thanpolas/univ3prices" for calculating Uniswap V3 Prices][univ3prices].
-> <br />☎️ ["@thanpolas/uniswap-chain-queries" for fetching on-chain data for ERC20 tokens, Uniswap V2 (and clones) and Uniswap V3][uni-queries].
+> 💰 [@thanpolas/univ3prices][univ3prices] for calculating Uniswap V3 Prices.
+> <br />☎️ [@thanpolas/uniswap-chain-queries][uni-queries] for fetching on-chain data for ERC20 tokens, Uniswap V2 (and clones) and Uniswap V3.
 
 ## <br />
 

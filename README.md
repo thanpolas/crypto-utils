@@ -38,12 +38,12 @@ npm install @thanpolas/crypto-utils --save
 ## Quick Start
 
 ```js
-const { tokenAuto } = require('@thanpolas/crypto-utils');
+const { tokenToAuto } = require('@thanpolas/crypto-utils');
 
 const tokenQuantity = '2083278970151697065687';
 const decimals = 18;
 
-const value = tokenAuto(tokenQuantity, decimals);
+const value = tokenToAuto(tokenQuantity, decimals);
 
 console.log(value);
 // "2083.27897"

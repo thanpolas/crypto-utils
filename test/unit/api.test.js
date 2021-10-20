@@ -20,6 +20,8 @@ describe('API Surface Tests', () => {
         'expDecs',
         'biConv',
         'Rounding',
+        'percentage',
+        'percentRemainter',
       ]);
     });
   });

@@ -470,6 +470,8 @@ When a new node version is available you need to updated it in the following:
 
 ## Release History
 
+-   **v0.4.1**, _20 Oct 2021_
+    -   Fixed typo of `percentRemainder()` function (was "percentRemainter"), [thanks vfat][vfat].
 -   **v0.4.0**, _20 Oct 2021_
     -   Added [percentage functions][percentage].
     -   Updated all dependencies to latest.
@@ -519,3 +521,4 @@ Copyright © [Thanos Polychronakis][thanpolas] and Authors, [Licensed under ISC]
 [crypto-utils]: https://github.com/thanpolas/crypto-utils
 [uni-queries]: https://github.com/thanpolas/uniswap-chain-queries
 [percentage]: #percentage
+[vfat]: https://github.com/vfat0

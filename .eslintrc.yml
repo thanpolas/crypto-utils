@@ -46,3 +46,6 @@ settings:
       constant: const
       file: fileoverview
       returns: return
+
+globals:
+  BigInt: false

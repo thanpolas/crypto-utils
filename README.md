@@ -26,6 +26,7 @@
 -   [Get Liquidity Pool ratios of Tokens][liquidity_pool_tokens].
 -   [Get crypto token values in human readable format][token_formatting].
 -   [Get fraction value in human readable format][fraction_formatting].
+-   [Get percentage and remainters of bigint numbers][percentage].
 
 ## Install
 
@@ -388,6 +389,58 @@ console.log(toFixed(fraction, opts));
 
 ---
 
+# Percentage
+
+Percentage functions use native `BigInt` type.
+
+## percentage(biNum, percent, optPrecision)
+
+Calculates the percentage of a bigint number (i.e. for 100 and 5% returns 5).
+
+-   **biNum** `{bigint}` The big integer number to calculate the percentage for.
+-   **percent** `{number|string}` Percent expressed with a precision of 10000 (i.e. 1% = 100).
+-   **optPrecision** `{number|string=}` The precision of the percentage, default 10000.
+-   **Returns** `{bigint}` The percentage number.
+
+```js
+const { percentage } = require('@thanpolas/crypto-utils');
+
+const biNum = BigInt(100);
+
+const percentageRes = percentage(biNum, 500);
+console.log(value);
+// 5n
+
+const percentageRes = percentage(biNum, 50);
+console.log(value); // Bigints have no decimals
+// 0n
+```
+
+## percentRemainter(biNum, percent, optPrecision)
+
+Calculates the percent remainter of a bigint number (i.e. for 100 and 5% returns 95).
+
+-   **biNum** `{bigint}` The big integer number to calculate the percentage for.
+-   **percent** `{number|string}` Percent expressed with a precision of 10000 (i.e. 1% = 100).
+-   **optPrecision** `{number|string=}` The precision of the percentage, default 10000.
+-   **Returns** `{bigint}` The percentage number.
+
+```js
+const { percentRemainter } = require('@thanpolas/crypto-utils');
+
+const biNum = BigInt(100);
+
+const percentRemainterRes = percentRemainter(biNum, 500);
+console.log(value);
+// 95n
+
+const percentRemainterRes = percentRemainter(biNum, 50);
+console.log(value); // Bigints have no decimals
+// 100n
+```
+
+---
+
 ## Available Utility Functions
 
 The crypto-utils exposes a few utility functions for more low-level calculations:
@@ -417,6 +470,9 @@ When a new node version is available you need to updated it in the following:
 
 ## Release History
 
+-   **v0.4.0**, _20 Oct 2021_
+    -   Added [percentage functions][percentage].
+    -   Updated all dependencies to latest.
 -   **v0.3.1**, _22 Aug 2021_
     -   Expose the `Rounding` enumeration for [Rounding constants][rounding].
 -   **v0.3.0**, _21 Aug 2021_
@@ -462,3 +518,4 @@ Copyright © [Thanos Polychronakis][thanpolas] and Authors, [Licensed under ISC]
 [univ3prices]: https://github.com/thanpolas/univ3prices
 [crypto-utils]: https://github.com/thanpolas/crypto-utils
 [uni-queries]: https://github.com/thanpolas/uniswap-chain-queries
+[percentage]: #percentage

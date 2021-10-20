@@ -44,7 +44,7 @@
         ],
         "testEnvironment": "node",
         "setupFilesAfterEnv": [
-            "jest-extended"
+            "jest-extended/all"
         ],
         "globalSetup": "./test/lib/global-setup.test.js",
         "testTimeout": 10000
@@ -52,25 +52,25 @@
     "dependencies": {
         "decimal.js": "^10.3.1",
         "invariant": "^2.2.4",
-        "jsbi": "^3.1.6",
+        "jsbi": "^4.0.0",
         "toformat": "^2.0.0"
     },
     "devDependencies": {
-        "@types/jest": "27.0.1",
+        "@types/jest": "27.0.2",
         "codecov": "^3.8.3",
-        "eslint": "7.32.0",
+        "eslint": "8.0.1",
         "eslint-config-airbnb-base": "14.2.1",
         "eslint-config-prettier": "8.3.0",
-        "eslint-plugin-import": "2.24.0",
-        "eslint-plugin-jest": "24.4.0",
-        "eslint-plugin-jsdoc": "36.0.7",
-        "eslint-plugin-prettier": "3.4.0",
+        "eslint-plugin-import": "2.25.2",
+        "eslint-plugin-jest": "25.2.2",
+        "eslint-plugin-jsdoc": "36.1.1",
+        "eslint-plugin-prettier": "4.0.0",
         "eslint-plugin-security": "1.4.0",
-        "expect": "27.0.6",
-        "jest": "27.0.6",
-        "jest-extended": "0.11.5",
-        "jest-junit": "12.2.0",
-        "prettier": "2.3.2",
-        "release-it": "14.11.5"
+        "expect": "27.3.1",
+        "jest": "27.3.1",
+        "jest-extended": "1.1.0",
+        "jest-junit": "13.0.0",
+        "prettier": "2.4.1",
+        "release-it": "14.11.6"
     }
 }

@@ -393,12 +393,12 @@ console.log(toFixed(fraction, opts));
 
 Percentage functions use native `BigInt` type.
 
-## percentage(biNum, percent, optPrecision)
+## percentage(biNum, basisPoints, optPrecision)
 
 Calculates the percentage of a bigint number (i.e. for 100 and 5% returns 5).
 
 -   **biNum** `{bigint}` The big integer number to calculate the percentage for.
--   **percent** `{number|string}` Percent expressed with a precision of 10000 (i.e. 1% = 100).
+-   **basisPoints** `{number|string}` Percent expressed with a precision of 10000 (i.e. 1% = 100).
 -   **optPrecision** `{number|string=}` The precision of the percentage, default 10000.
 -   **Returns** `{bigint}` The percentage number.
 
@@ -416,25 +416,25 @@ console.log(value); // Bigints have no decimals
 // 0n
 ```
 
-## percentRemainter(biNum, percent, optPrecision)
+## percentRemainder(biNum, basisPoints, optPrecision)
 
-Calculates the percent remainter of a bigint number (i.e. for 100 and 5% returns 95).
+Calculates the percent remainder of a bigint number (i.e. for 100 and 5% returns 95).
 
 -   **biNum** `{bigint}` The big integer number to calculate the percentage for.
--   **percent** `{number|string}` Percent expressed with a precision of 10000 (i.e. 1% = 100).
+-   **basisPoints** `{number|string}` Percent expressed with a precision of 10000 (i.e. 1% = 100).
 -   **optPrecision** `{number|string=}` The precision of the percentage, default 10000.
 -   **Returns** `{bigint}` The percentage number.
 
 ```js
-const { percentRemainter } = require('@thanpolas/crypto-utils');
+const { percentRemainder } = require('@thanpolas/crypto-utils');
 
 const biNum = BigInt(100);
 
-const percentRemainterRes = percentRemainter(biNum, 500);
+const percentRemainderRes = percentRemainder(biNum, 500);
 console.log(value);
 // 95n
 
-const percentRemainterRes = percentRemainter(biNum, 50);
+const percentRemainderRes = percentRemainder(biNum, 50);
 console.log(value); // Bigints have no decimals
 // 100n
 ```
@@ -470,6 +470,8 @@ When a new node version is available you need to updated it in the following:
 
 ## Release History
 
+-   **v0.4.1**, _20 Oct 2021_
+    -   Fixed typo of `percentRemainder()` function (was "percentRemainter"), [thanks vfat][vfat].
 -   **v0.4.0**, _20 Oct 2021_
     -   Added [percentage functions][percentage].
     -   Updated all dependencies to latest.
@@ -519,3 +521,4 @@ Copyright © [Thanos Polychronakis][thanpolas] and Authors, [Licensed under ISC]
 [crypto-utils]: https://github.com/thanpolas/crypto-utils
 [uni-queries]: https://github.com/thanpolas/uniswap-chain-queries
 [percentage]: #percentage
+[vfat]: https://github.com/vfat0

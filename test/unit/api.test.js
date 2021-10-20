@@ -21,7 +21,7 @@ describe('API Surface Tests', () => {
         'biConv',
         'Rounding',
         'percentage',
-        'percentRemainter',
+        'percentRemainder',
       ]);
     });
   });

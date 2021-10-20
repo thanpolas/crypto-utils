@@ -470,6 +470,9 @@ When a new node version is available you need to updated it in the following:
 
 ## Release History
 
+-   **v0.4.0**, _20 Oct 2021_
+    -   Added [percentage functions][percentage].
+    -   Updated all dependencies to latest.
 -   **v0.3.1**, _22 Aug 2021_
     -   Expose the `Rounding` enumeration for [Rounding constants][rounding].
 -   **v0.3.0**, _21 Aug 2021_

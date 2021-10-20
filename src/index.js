@@ -15,6 +15,7 @@
 const { tokenToSignificant, tokenToFixed, tokenToAuto } = require('./tokens');
 const { toSignificant, toFixed, toAuto } = require('./fractions');
 const { poolTokensToAuto } = require('./pool-tokens');
+const { percentage, percentRemainter } = require('./percentage');
 const { expDecs, biConv } = require('./utils');
 const { Rounding } = require('./constants');
 
@@ -30,3 +31,5 @@ app.toAuto = toAuto;
 app.expDecs = expDecs;
 app.biConv = biConv;
 app.Rounding = Rounding;
+app.percentage = percentage;
+app.percentRemainter = percentRemainter;

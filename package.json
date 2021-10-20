@@ -19,7 +19,7 @@
     },
     "license": "ISC",
     "engines": {
-        "node": ">=10"
+        "node": ">=12"
     },
     "scripts": {
         "test": "npm run eslint && npm run jest",

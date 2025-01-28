@@ -117,6 +117,9 @@ describe('Token format', () => {
         };
         expect(tokenToAuto(token18, 18, opts)).toEqual('$2,083.28');
       });
+      test('zero value', () => {
+        expect(tokenToAuto(BigInt(0), 18)).toEqual('0');
+      });
     });
   });
 });
